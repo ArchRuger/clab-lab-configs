@@ -1,0 +1,572 @@
+# id	phase	node	expect	mode	n	pattern	reject	command	description. Made by deploy/gen-mix-configs.py.
+A-xrv-rtr1-01	access	xrv-rtr1	pass	match	-	IOS XR	-	show version	Login with the SSH key
+A-xrv-rtr1-02	access	xrv-rtr1	pass	match	-	10\.255\.0\.1 	-	show ipv4 interface brief	Startup config loaded: Loopback0
+S-xrv-rtr1-01	services	xrv-rtr1	pass	count	4	 Up 	-	show isis adjacency	IS-IS: one adjacency for each core link
+S-xrv-rtr1-02	services	xrv-rtr1	pass	count	12	SR Pfx \(idx	-	show mpls forwarding	SR-MPLS: one prefix SID for each other core node
+S-xrv-rtr1-03	services	xrv-rtr1	pass	count	12	^10\.255\.	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp vpnv4 unicast summary	iBGP VPNv4: all sessions up
+S-xrv-rtr1-04	services	xrv-rtr1	pass	count	12	^10\.255\.	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp l2vpn evpn summary	iBGP EVPN: all sessions up
+A-xrv-rtr2-01	access	xrv-rtr2	pass	match	-	IOS XR	-	show version	Login with the SSH key
+A-xrv-rtr2-02	access	xrv-rtr2	pass	match	-	10\.255\.0\.2 	-	show ipv4 interface brief	Startup config loaded: Loopback0
+S-xrv-rtr2-01	services	xrv-rtr2	pass	count	3	 Up 	-	show isis adjacency	IS-IS: one adjacency for each core link
+S-xrv-rtr2-02	services	xrv-rtr2	pass	count	12	SR Pfx \(idx	-	show mpls forwarding	SR-MPLS: one prefix SID for each other core node
+S-xrv-rtr2-03	services	xrv-rtr2	pass	count	12	^10\.255\.	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp vpnv4 unicast summary	iBGP VPNv4: all sessions up
+S-xrv-rtr2-04	services	xrv-rtr2	pass	count	12	^10\.255\.	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp l2vpn evpn summary	iBGP EVPN: all sessions up
+S-xrv-rtr2-05	services	xrv-rtr2	pass	count	1	^10\.111\.	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp vrf L3VPN-A summary	L3VPN 111: eBGP to the endpoint up
+S-xrv-rtr2-06	services	xrv-rtr2	pass	count	4	PW21[0-9][0-9] +UP	-	show l2vpn xconnect	VPWS 21az, targeted LDP: four xconnects UP
+S-xrv-rtr2-07	services	xrv-rtr2	pass	count	4	PW23[0-9][0-9] +UP	-	show l2vpn xconnect	VPWS 23az, EVPN: four xconnects UP
+S-xrv-rtr2-08	services	xrv-rtr2	pass	info	-	-	-	show l2vpn xconnect detail	VPWS: type, control word and MTU of both sides
+A-xrv-rtr3-01	access	xrv-rtr3	pass	match	-	IOS XR	-	show version	Login with the SSH key
+A-xrv-rtr3-02	access	xrv-rtr3	pass	match	-	10\.255\.0\.3 	-	show ipv4 interface brief	Startup config loaded: Loopback0
+S-xrv-rtr3-01	services	xrv-rtr3	pass	count	3	 Up 	-	show isis adjacency	IS-IS: one adjacency for each core link
+S-xrv-rtr3-02	services	xrv-rtr3	pass	count	12	SR Pfx \(idx	-	show mpls forwarding	SR-MPLS: one prefix SID for each other core node
+S-xrv-rtr3-03	services	xrv-rtr3	pass	count	2	^10\.255\.	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp vpnv4 unicast summary	iBGP VPNv4: all sessions up
+S-xrv-rtr3-04	services	xrv-rtr3	pass	count	2	^10\.255\.	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp l2vpn evpn summary	iBGP EVPN: all sessions up
+S-xrv-rtr3-05	services	xrv-rtr3	pass	count	1	^10\.111\.	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp vrf L3VPN-A summary	L3VPN 111: eBGP to the endpoint up
+S-xrv-rtr3-06	services	xrv-rtr3	pass	count	4	PW21[0-9][0-9] +UP	-	show l2vpn xconnect	VPWS 21az, targeted LDP: four xconnects UP
+S-xrv-rtr3-07	services	xrv-rtr3	pass	count	4	PW23[0-9][0-9] +UP	-	show l2vpn xconnect	VPWS 23az, EVPN: four xconnects UP
+S-xrv-rtr3-08	services	xrv-rtr3	pass	info	-	-	-	show l2vpn xconnect detail	VPWS: type, control word and MTU of both sides
+A-vjunos-RTR1-01	access	vjunos-RTR1	pass	match	-	Junos	-	show version	Login with the SSH key
+A-vjunos-RTR1-02	access	vjunos-RTR1	pass	match	-	10\.255\.0\.11($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-vjunos-RTR1-01	services	vjunos-RTR1	pass	count	3	 Up 	-	show isis adjacency	IS-IS: all adjacencies up
+S-vjunos-RTR1-02	services	vjunos-RTR1	pass	match	-	SRGB Block Allocation: Success	-	show isis overview	SR-MPLS: label block 16000 to 23999 allocated
+S-vjunos-RTR1-03	services	vjunos-RTR1	pass	count	12	L-ISIS	-	show route table inet.3	SR-MPLS: one route for each other core node
+S-vjunos-RTR1-04	services	vjunos-RTR1	pass	count	3	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	BGP: route reflectors and CE sessions up
+S-vjunos-RTR1-05	services	vjunos-RTR1	pass	count	1	rmt +Up	-	show l2circuit connections	VPWS, targeted LDP: all pseudowires Up
+S-vjunos-RTR1-06	services	vjunos-RTR1	pass	count	7	rmt +Up	-	show vpls connections	VPLS 220: pseudowire Up to each PE that is not XRv9k
+S-vjunos-RTR1-07	services	vjunos-RTR1	pass	info	-	-	-	show evpn instance EVPN-240 extensive	EVPN LAN 240: neighbors
+S-vjunos-RTR1-08	services	vjunos-RTR1	pass	info	-	-	-	show evpn vpws-instance	VPWS, EVPN: remote PE and status of each instance
+A-vjunos-RTR2-01	access	vjunos-RTR2	pass	match	-	Junos	-	show version	Login with the SSH key
+A-vjunos-RTR2-02	access	vjunos-RTR2	pass	match	-	10\.255\.0\.12($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-vjunos-RTR2-01	services	vjunos-RTR2	pass	count	3	 Up 	-	show isis adjacency	IS-IS: all adjacencies up
+S-vjunos-RTR2-02	services	vjunos-RTR2	pass	match	-	SRGB Block Allocation: Success	-	show isis overview	SR-MPLS: label block 16000 to 23999 allocated
+S-vjunos-RTR2-03	services	vjunos-RTR2	pass	count	12	L-ISIS	-	show route table inet.3	SR-MPLS: one route for each other core node
+S-vjunos-RTR2-04	services	vjunos-RTR2	pass	count	4	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	BGP: route reflectors and CE sessions up
+S-vjunos-RTR2-05	services	vjunos-RTR2	pass	count	5	rmt +Up	-	show l2circuit connections	VPWS, targeted LDP: all pseudowires Up
+S-vjunos-RTR2-06	services	vjunos-RTR2	pass	count	7	rmt +Up	-	show vpls connections	VPLS 220: pseudowire Up to each PE that is not XRv9k
+S-vjunos-RTR2-07	services	vjunos-RTR2	pass	info	-	-	-	show evpn instance EVPN-240 extensive	EVPN LAN 240: neighbors
+S-vjunos-RTR2-08	services	vjunos-RTR2	pass	info	-	-	-	show evpn vpws-instance	VPWS, EVPN: remote PE and status of each instance
+A-vjunos-RTR3-01	access	vjunos-RTR3	pass	match	-	Junos	-	show version	Login with the SSH key
+A-vjunos-RTR3-02	access	vjunos-RTR3	pass	match	-	10\.255\.0\.13($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-vjunos-RTR3-01	services	vjunos-RTR3	pass	count	3	 Up 	-	show isis adjacency	IS-IS: all adjacencies up
+S-vjunos-RTR3-02	services	vjunos-RTR3	pass	match	-	SRGB Block Allocation: Success	-	show isis overview	SR-MPLS: label block 16000 to 23999 allocated
+S-vjunos-RTR3-03	services	vjunos-RTR3	pass	count	12	L-ISIS	-	show route table inet.3	SR-MPLS: one route for each other core node
+S-vjunos-RTR3-04	services	vjunos-RTR3	pass	count	4	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	BGP: route reflectors and CE sessions up
+S-vjunos-RTR3-05	services	vjunos-RTR3	pass	count	5	rmt +Up	-	show l2circuit connections	VPWS, targeted LDP: all pseudowires Up
+S-vjunos-RTR3-06	services	vjunos-RTR3	pass	count	7	rmt +Up	-	show vpls connections	VPLS 220: pseudowire Up to each PE that is not XRv9k
+S-vjunos-RTR3-07	services	vjunos-RTR3	pass	info	-	-	-	show evpn instance EVPN-240 extensive	EVPN LAN 240: neighbors
+S-vjunos-RTR3-08	services	vjunos-RTR3	pass	info	-	-	-	show evpn vpws-instance	VPWS, EVPN: remote PE and status of each instance
+A-vjunos-RTR4-01	access	vjunos-RTR4	pass	match	-	Junos	-	show version	Login with the SSH key
+A-vjunos-RTR4-02	access	vjunos-RTR4	pass	match	-	10\.255\.0\.14($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-vjunos-RTR4-01	services	vjunos-RTR4	pass	count	3	 Up 	-	show isis adjacency	IS-IS: all adjacencies up
+S-vjunos-RTR4-02	services	vjunos-RTR4	pass	match	-	SRGB Block Allocation: Success	-	show isis overview	SR-MPLS: label block 16000 to 23999 allocated
+S-vjunos-RTR4-03	services	vjunos-RTR4	pass	count	12	L-ISIS	-	show route table inet.3	SR-MPLS: one route for each other core node
+S-vjunos-RTR4-04	services	vjunos-RTR4	pass	count	3	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	BGP: route reflectors and CE sessions up
+S-vjunos-RTR4-05	services	vjunos-RTR4	pass	count	1	rmt +Up	-	show l2circuit connections	VPWS, targeted LDP: all pseudowires Up
+S-vjunos-RTR4-06	services	vjunos-RTR4	pass	count	7	rmt +Up	-	show vpls connections	VPLS 220: pseudowire Up to each PE that is not XRv9k
+S-vjunos-RTR4-07	services	vjunos-RTR4	pass	info	-	-	-	show evpn instance EVPN-240 extensive	EVPN LAN 240: neighbors
+S-vjunos-RTR4-08	services	vjunos-RTR4	pass	info	-	-	-	show evpn vpws-instance	VPWS, EVPN: remote PE and status of each instance
+A-vjunos-SW1-01	access	vjunos-SW1	pass	match	-	Junos	-	show version	Login with the SSH key
+A-vjunos-SW1-02	access	vjunos-SW1	pass	match	-	172\.16\.0\.41($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-vjunos-SW1-01	services	vjunos-SW1	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary instance CE	L3VPN 110: eBGP to vJunos-router up
+A-vjunos-SW2-01	access	vjunos-SW2	pass	match	-	Junos	-	show version	Login with the SSH key
+A-vjunos-SW2-02	access	vjunos-SW2	pass	match	-	172\.16\.0\.42($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-vjunos-SW2-01	services	vjunos-SW2	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary instance CE	L3VPN 110: eBGP to vJunos-router up
+A-vjunos-SW3-01	access	vjunos-SW3	pass	match	-	Junos	-	show version	Login with the SSH key
+A-vjunos-SW3-02	access	vjunos-SW3	pass	match	-	172\.16\.0\.43($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-vjunos-SW3-01	services	vjunos-SW3	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary instance CE	L3VPN 110: eBGP to vJunos-router up
+A-vjunos-SW4-01	access	vjunos-SW4	pass	match	-	Junos	-	show version	Login with the SSH key
+A-vjunos-SW4-02	access	vjunos-SW4	pass	match	-	172\.16\.0\.44($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-vjunos-SW4-01	services	vjunos-SW4	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary instance CE	L3VPN 110: eBGP to vJunos-router up
+A-evo-rtr1-01	access	evo-rtr1	pass	match	-	Junos	-	show version	Login with the SSH key
+A-evo-rtr1-02	access	evo-rtr1	pass	match	-	10\.255\.0\.21($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-evo-rtr1-01	services	evo-rtr1	pass	count	3	 Up 	-	show isis adjacency	IS-IS: all adjacencies up
+S-evo-rtr1-02	services	evo-rtr1	pass	count	12	L-ISIS	-	show route table inet.3	SR-MPLS: one route for each other core node
+S-evo-rtr1-03	services	evo-rtr1	pass	count	3	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	BGP: route reflectors and CE sessions up
+A-evo-rtr2-01	access	evo-rtr2	pass	match	-	Junos	-	show version	Login with the SSH key
+A-evo-rtr2-02	access	evo-rtr2	pass	match	-	10\.255\.0\.22($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-evo-rtr2-01	services	evo-rtr2	pass	count	2	 Up 	-	show isis adjacency	IS-IS: all adjacencies up
+S-evo-rtr2-02	services	evo-rtr2	pass	count	12	L-ISIS	-	show route table inet.3	SR-MPLS: one route for each other core node
+S-evo-rtr2-03	services	evo-rtr2	pass	count	4	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	BGP: route reflectors and CE sessions up
+S-evo-rtr2-04	services	evo-rtr2	pass	count	4	rmt +Up	-	show l2circuit connections	VPWS, targeted LDP: all pseudowires Up
+S-evo-rtr2-05	services	evo-rtr2	pass	count	7	rmt +Up	-	show vpls connections	VPLS 220: pseudowire Up to each PE that is not XRv9k
+S-evo-rtr2-06	services	evo-rtr2	pass	info	-	-	-	show evpn instance EVPN-240 extensive	EVPN LAN 240: neighbors
+S-evo-rtr2-07	services	evo-rtr2	pass	info	-	-	-	show evpn vpws-instance	VPWS, EVPN: remote PE and status of each instance
+A-evo-rtr3-01	access	evo-rtr3	pass	match	-	Junos	-	show version	Login with the SSH key
+A-evo-rtr3-02	access	evo-rtr3	pass	match	-	10\.255\.0\.23($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-evo-rtr3-01	services	evo-rtr3	pass	count	2	 Up 	-	show isis adjacency	IS-IS: all adjacencies up
+S-evo-rtr3-02	services	evo-rtr3	pass	count	12	L-ISIS	-	show route table inet.3	SR-MPLS: one route for each other core node
+S-evo-rtr3-03	services	evo-rtr3	pass	count	4	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	BGP: route reflectors and CE sessions up
+S-evo-rtr3-04	services	evo-rtr3	pass	count	4	rmt +Up	-	show l2circuit connections	VPWS, targeted LDP: all pseudowires Up
+S-evo-rtr3-05	services	evo-rtr3	pass	count	7	rmt +Up	-	show vpls connections	VPLS 220: pseudowire Up to each PE that is not XRv9k
+S-evo-rtr3-06	services	evo-rtr3	pass	info	-	-	-	show evpn instance EVPN-240 extensive	EVPN LAN 240: neighbors
+S-evo-rtr3-07	services	evo-rtr3	pass	info	-	-	-	show evpn vpws-instance	VPWS, EVPN: remote PE and status of each instance
+A-CEOS1-01	access	CEOS1	pass	match	-	Arista	-	show version	Login with the SSH key
+A-CEOS1-02	access	CEOS1	pass	match	-	10\.255\.0\.31/32	-	show ip interface brief	Startup config loaded: Loopback0
+S-CEOS1-01	services	CEOS1	pass	count	1	 UP 	-	show isis neighbors	IS-IS: adjacency to cJunosEvolved up
+S-CEOS1-02	services	CEOS1	pass	count	2	Estab	-	show bgp vpn-ipv4 summary	iBGP VPNv4: both route reflectors up
+S-CEOS1-03	services	CEOS1	pass	count	2	Estab	-	show bgp evpn summary	iBGP EVPN: both route reflectors up
+S-CEOS1-04	services	CEOS1	pass	count	1	Estab	-	show ip bgp summary vrf L3VPN-A	L3VPN: eBGP to each CE up
+S-CEOS1-05	services	CEOS1	pass	info	-	-	-	show mac address-table vlan 240	EVPN LAN 240: remote MAC addresses
+A-CEOS2-01	access	CEOS2	pass	match	-	Arista	-	show version	Login with the SSH key
+A-CEOS2-02	access	CEOS2	pass	match	-	10\.255\.0\.32/32	-	show ip interface brief	Startup config loaded: Loopback0
+S-CEOS2-01	services	CEOS2	pass	count	1	 UP 	-	show isis neighbors	IS-IS: adjacency to cJunosEvolved up
+S-CEOS2-02	services	CEOS2	pass	count	2	Estab	-	show bgp vpn-ipv4 summary	iBGP VPNv4: both route reflectors up
+S-CEOS2-03	services	CEOS2	pass	count	2	Estab	-	show bgp evpn summary	iBGP EVPN: both route reflectors up
+S-CEOS2-04	services	CEOS2	pass	count	2	Estab	-	show ip bgp summary vrf L3VPN-A	L3VPN: eBGP to each CE up
+S-CEOS2-05	services	CEOS2	pass	count	8	 Up	-	show patch panel	VPWS 21az and 23az: eight patches Up
+S-CEOS2-06	services	CEOS2	pass	info	-	-	-	show patch panel detail	VPWS: type, control word and MTU
+S-CEOS2-07	services	CEOS2	pass	info	-	-	-	show vpls	VPLS 220: state of each pseudowire
+S-CEOS2-08	services	CEOS2	pass	info	-	-	-	show mac address-table vlan 240	EVPN LAN 240: remote MAC addresses
+A-CEOS3-01	access	CEOS3	pass	match	-	Arista	-	show version	Login with the SSH key
+A-CEOS3-02	access	CEOS3	pass	match	-	10\.255\.0\.33/32	-	show ip interface brief	Startup config loaded: Loopback0
+S-CEOS3-01	services	CEOS3	pass	count	1	 UP 	-	show isis neighbors	IS-IS: adjacency to cJunosEvolved up
+S-CEOS3-02	services	CEOS3	pass	count	2	Estab	-	show bgp vpn-ipv4 summary	iBGP VPNv4: both route reflectors up
+S-CEOS3-03	services	CEOS3	pass	count	2	Estab	-	show bgp evpn summary	iBGP EVPN: both route reflectors up
+S-CEOS3-04	services	CEOS3	pass	count	2	Estab	-	show ip bgp summary vrf L3VPN-A	L3VPN: eBGP to each CE up
+S-CEOS3-05	services	CEOS3	pass	count	8	 Up	-	show patch panel	VPWS 21az and 23az: eight patches Up
+S-CEOS3-06	services	CEOS3	pass	info	-	-	-	show patch panel detail	VPWS: type, control word and MTU
+S-CEOS3-07	services	CEOS3	pass	info	-	-	-	show vpls	VPLS 220: state of each pseudowire
+S-CEOS3-08	services	CEOS3	pass	info	-	-	-	show mac address-table vlan 240	EVPN LAN 240: remote MAC addresses
+A-srx1-01	access	srx1	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx1-02	access	srx1	pass	match	-	172\.16\.0\.51($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx1-01	services	srx1	pass	count	2	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN: eBGP to cJunosEvolved and cEOS up
+A-srx2-01	access	srx2	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx2-02	access	srx2	pass	match	-	172\.16\.0\.52($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx2-01	services	srx2	pass	count	2	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN: eBGP to cJunosEvolved and cEOS up
+A-srx3-01	access	srx3	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx3-02	access	srx3	pass	match	-	172\.16\.0\.53($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx3-01	services	srx3	pass	count	2	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN: eBGP to cJunosEvolved and cEOS up
+A-srx4-01	access	srx4	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx4-02	access	srx4	pass	match	-	172\.16\.0\.104($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx4-01	services	srx4	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN 111: eBGP to the PE up
+A-srx5-01	access	srx5	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx5-02	access	srx5	pass	match	-	172\.16\.0\.105($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx5-01	services	srx5	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN 111: eBGP to the PE up
+A-srx7-01	access	srx7	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx7-02	access	srx7	pass	match	-	172\.16\.0\.107($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx7-01	services	srx7	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN 111: eBGP to the PE up
+A-srx8-01	access	srx8	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx8-02	access	srx8	pass	match	-	172\.16\.0\.108($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx8-01	services	srx8	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN 111: eBGP to the PE up
+A-srx9-01	access	srx9	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx9-02	access	srx9	pass	match	-	10\.21\.14\.2/	-	show interfaces terse ge-0/0/0	Startup config loaded: first unit
+A-srx10-01	access	srx10	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx10-02	access	srx10	pass	match	-	10\.21\.13\.2/	-	show interfaces terse ge-0/0/0	Startup config loaded: first unit
+A-srx12-01	access	srx12	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx12-02	access	srx12	pass	match	-	10\.21\.12\.2/	-	show interfaces terse ge-0/0/0	Startup config loaded: first unit
+A-srx13-01	access	srx13	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx13-02	access	srx13	pass	match	-	172\.16\.0\.113($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx13-01	services	srx13	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN 111: eBGP to the PE up
+A-srx14-01	access	srx14	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx14-02	access	srx14	pass	match	-	10\.21\.41\.1/	-	show interfaces terse ge-0/0/0	Startup config loaded: first unit
+A-srx15-01	access	srx15	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx15-02	access	srx15	pass	match	-	10\.21\.31\.1/	-	show interfaces terse ge-0/0/0	Startup config loaded: first unit
+A-srx17-01	access	srx17	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx17-02	access	srx17	pass	match	-	10\.21\.21\.1/	-	show interfaces terse ge-0/0/0	Startup config loaded: first unit
+A-srx18-01	access	srx18	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx18-02	access	srx18	pass	match	-	10\.21\.11\.2/	-	show interfaces terse ge-0/0/0	Startup config loaded: first unit
+A-srx19-01	access	srx19	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx19-02	access	srx19	pass	match	-	172\.16\.0\.119($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx19-01	services	srx19	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN 111: eBGP to the PE up
+A-srx20-01	access	srx20	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx20-02	access	srx20	pass	match	-	172\.16\.0\.120($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx20-01	services	srx20	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN 111: eBGP to the PE up
+A-srx22-01	access	srx22	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx22-02	access	srx22	pass	match	-	172\.16\.0\.122($|[^0-9])	-	show interfaces terse lo0	Startup config loaded: loopback
+S-srx22-01	services	srx22	pass	count	1	^ *[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ +[0-9]+ 	Idle|Active|Connect|OpenSent|OpenConfirm	show bgp summary	L3VPN 111: eBGP to the PE up
+A-srx23-01	access	srx23	pass	match	-	Junos	-	show version	Login with the SSH key
+A-srx23-02	access	srx23	pass	match	-	10\.21\.11\.1/	-	show interfaces terse ge-0/0/0	Startup config loaded: first unit
+P-vjunos-SW1-01	ping	vjunos-SW1	pass	ping	4	-	-	ping 172.16.0.42 source 172.16.0.41 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW2
+P-vjunos-SW1-02	ping	vjunos-SW1	pass	ping	4	-	-	ping 172.16.0.43 source 172.16.0.41 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW3
+P-vjunos-SW1-03	ping	vjunos-SW1	pass	ping	4	-	-	ping 172.16.0.44 source 172.16.0.41 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW4
+P-vjunos-SW1-04	ping	vjunos-SW1	pass	ping	4	-	-	ping 172.16.0.51 source 172.16.0.41 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx1
+P-vjunos-SW1-05	ping	vjunos-SW1	pass	ping	4	-	-	ping 172.16.0.52 source 172.16.0.41 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx2
+P-vjunos-SW1-06	ping	vjunos-SW1	pass	ping	4	-	-	ping 172.16.0.53 source 172.16.0.41 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx3
+P-vjunos-SW1-07	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.210.0.2 routing-instance CE count 5 rapid	VPWS 210, targeted LDP: vjunos-SW3
+P-vjunos-SW1-08	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.230.0.2 routing-instance CE count 5 rapid	VPWS 230, EVPN: vjunos-SW4
+P-vjunos-SW1-09	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.220.0.2 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW2
+P-vjunos-SW1-10	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.220.0.3 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW3
+P-vjunos-SW1-11	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.220.0.4 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW4
+P-vjunos-SW1-12	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.220.0.104 routing-instance CE count 5 rapid	VPLS 220: srx4 on CEOS3
+P-vjunos-SW1-13	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.220.0.105 routing-instance CE count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-vjunos-SW1-14	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.220.0.107 routing-instance CE count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-vjunos-SW1-15	ping	vjunos-SW1	xfail	ping	4	-	-	ping 10.220.0.108 routing-instance CE count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-vjunos-SW1-16	ping	vjunos-SW1	xfail	ping	4	-	-	ping 10.220.0.113 routing-instance CE count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-vjunos-SW1-17	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.220.0.119 routing-instance CE count 5 rapid	VPLS 220: srx19 on CEOS2
+P-vjunos-SW1-18	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.220.0.120 routing-instance CE count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-vjunos-SW1-19	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.220.0.122 routing-instance CE count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-vjunos-SW1-20	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.42 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW2
+P-vjunos-SW1-21	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.43 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW3
+P-vjunos-SW1-22	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.44 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW4
+P-vjunos-SW1-23	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.51 routing-instance CE count 5 rapid	EVPN LAN 240: srx1 on cEOS
+P-vjunos-SW1-24	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.52 routing-instance CE count 5 rapid	EVPN LAN 240: srx2 on cEOS
+P-vjunos-SW1-25	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.53 routing-instance CE count 5 rapid	EVPN LAN 240: srx3 on cEOS
+P-vjunos-SW1-26	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.104 routing-instance CE count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-vjunos-SW1-27	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.105 routing-instance CE count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-vjunos-SW1-28	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.107 routing-instance CE count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-vjunos-SW1-29	ping	vjunos-SW1	xfail	ping	4	-	-	ping 10.240.0.108 routing-instance CE count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-vjunos-SW1-30	ping	vjunos-SW1	xfail	ping	4	-	-	ping 10.240.0.113 routing-instance CE count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-vjunos-SW1-31	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.119 routing-instance CE count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-vjunos-SW1-32	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.120 routing-instance CE count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-vjunos-SW1-33	ping	vjunos-SW1	pass	ping	4	-	-	ping 10.240.0.122 routing-instance CE count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-vjunos-SW2-01	ping	vjunos-SW2	pass	ping	4	-	-	ping 172.16.0.41 source 172.16.0.42 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW1
+P-vjunos-SW2-02	ping	vjunos-SW2	pass	ping	4	-	-	ping 172.16.0.43 source 172.16.0.42 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW3
+P-vjunos-SW2-03	ping	vjunos-SW2	pass	ping	4	-	-	ping 172.16.0.44 source 172.16.0.42 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW4
+P-vjunos-SW2-04	ping	vjunos-SW2	pass	ping	4	-	-	ping 172.16.0.51 source 172.16.0.42 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx1
+P-vjunos-SW2-05	ping	vjunos-SW2	pass	ping	4	-	-	ping 172.16.0.52 source 172.16.0.42 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx2
+P-vjunos-SW2-06	ping	vjunos-SW2	pass	ping	4	-	-	ping 172.16.0.53 source 172.16.0.42 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx3
+P-vjunos-SW2-07	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.210.0.10 routing-instance CE count 5 rapid	VPWS 210, targeted LDP: vjunos-SW4
+P-vjunos-SW2-08	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.230.0.10 routing-instance CE count 5 rapid	VPWS 230, EVPN: vjunos-SW3
+P-vjunos-SW2-09	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.220.0.1 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW1
+P-vjunos-SW2-10	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.220.0.3 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW3
+P-vjunos-SW2-11	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.220.0.4 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW4
+P-vjunos-SW2-12	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.220.0.104 routing-instance CE count 5 rapid	VPLS 220: srx4 on CEOS3
+P-vjunos-SW2-13	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.220.0.105 routing-instance CE count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-vjunos-SW2-14	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.220.0.107 routing-instance CE count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-vjunos-SW2-15	ping	vjunos-SW2	xfail	ping	4	-	-	ping 10.220.0.108 routing-instance CE count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-vjunos-SW2-16	ping	vjunos-SW2	xfail	ping	4	-	-	ping 10.220.0.113 routing-instance CE count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-vjunos-SW2-17	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.220.0.119 routing-instance CE count 5 rapid	VPLS 220: srx19 on CEOS2
+P-vjunos-SW2-18	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.220.0.120 routing-instance CE count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-vjunos-SW2-19	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.220.0.122 routing-instance CE count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-vjunos-SW2-20	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.41 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW1
+P-vjunos-SW2-21	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.43 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW3
+P-vjunos-SW2-22	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.44 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW4
+P-vjunos-SW2-23	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.51 routing-instance CE count 5 rapid	EVPN LAN 240: srx1 on cEOS
+P-vjunos-SW2-24	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.52 routing-instance CE count 5 rapid	EVPN LAN 240: srx2 on cEOS
+P-vjunos-SW2-25	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.53 routing-instance CE count 5 rapid	EVPN LAN 240: srx3 on cEOS
+P-vjunos-SW2-26	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.104 routing-instance CE count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-vjunos-SW2-27	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.105 routing-instance CE count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-vjunos-SW2-28	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.107 routing-instance CE count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-vjunos-SW2-29	ping	vjunos-SW2	xfail	ping	4	-	-	ping 10.240.0.108 routing-instance CE count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-vjunos-SW2-30	ping	vjunos-SW2	xfail	ping	4	-	-	ping 10.240.0.113 routing-instance CE count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-vjunos-SW2-31	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.119 routing-instance CE count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-vjunos-SW2-32	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.120 routing-instance CE count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-vjunos-SW2-33	ping	vjunos-SW2	pass	ping	4	-	-	ping 10.240.0.122 routing-instance CE count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-vjunos-SW3-01	ping	vjunos-SW3	pass	ping	4	-	-	ping 172.16.0.41 source 172.16.0.43 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW1
+P-vjunos-SW3-02	ping	vjunos-SW3	pass	ping	4	-	-	ping 172.16.0.42 source 172.16.0.43 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW2
+P-vjunos-SW3-03	ping	vjunos-SW3	pass	ping	4	-	-	ping 172.16.0.44 source 172.16.0.43 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW4
+P-vjunos-SW3-04	ping	vjunos-SW3	pass	ping	4	-	-	ping 172.16.0.51 source 172.16.0.43 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx1
+P-vjunos-SW3-05	ping	vjunos-SW3	pass	ping	4	-	-	ping 172.16.0.52 source 172.16.0.43 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx2
+P-vjunos-SW3-06	ping	vjunos-SW3	pass	ping	4	-	-	ping 172.16.0.53 source 172.16.0.43 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx3
+P-vjunos-SW3-07	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.210.0.1 routing-instance CE count 5 rapid	VPWS 210, targeted LDP: vjunos-SW1
+P-vjunos-SW3-08	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.230.0.9 routing-instance CE count 5 rapid	VPWS 230, EVPN: vjunos-SW2
+P-vjunos-SW3-09	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.220.0.1 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW1
+P-vjunos-SW3-10	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.220.0.2 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW2
+P-vjunos-SW3-11	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.220.0.4 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW4
+P-vjunos-SW3-12	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.220.0.104 routing-instance CE count 5 rapid	VPLS 220: srx4 on CEOS3
+P-vjunos-SW3-13	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.220.0.105 routing-instance CE count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-vjunos-SW3-14	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.220.0.107 routing-instance CE count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-vjunos-SW3-15	ping	vjunos-SW3	xfail	ping	4	-	-	ping 10.220.0.108 routing-instance CE count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-vjunos-SW3-16	ping	vjunos-SW3	xfail	ping	4	-	-	ping 10.220.0.113 routing-instance CE count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-vjunos-SW3-17	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.220.0.119 routing-instance CE count 5 rapid	VPLS 220: srx19 on CEOS2
+P-vjunos-SW3-18	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.220.0.120 routing-instance CE count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-vjunos-SW3-19	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.220.0.122 routing-instance CE count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-vjunos-SW3-20	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.41 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW1
+P-vjunos-SW3-21	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.42 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW2
+P-vjunos-SW3-22	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.44 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW4
+P-vjunos-SW3-23	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.51 routing-instance CE count 5 rapid	EVPN LAN 240: srx1 on cEOS
+P-vjunos-SW3-24	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.52 routing-instance CE count 5 rapid	EVPN LAN 240: srx2 on cEOS
+P-vjunos-SW3-25	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.53 routing-instance CE count 5 rapid	EVPN LAN 240: srx3 on cEOS
+P-vjunos-SW3-26	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.104 routing-instance CE count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-vjunos-SW3-27	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.105 routing-instance CE count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-vjunos-SW3-28	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.107 routing-instance CE count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-vjunos-SW3-29	ping	vjunos-SW3	xfail	ping	4	-	-	ping 10.240.0.108 routing-instance CE count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-vjunos-SW3-30	ping	vjunos-SW3	xfail	ping	4	-	-	ping 10.240.0.113 routing-instance CE count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-vjunos-SW3-31	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.119 routing-instance CE count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-vjunos-SW3-32	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.120 routing-instance CE count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-vjunos-SW3-33	ping	vjunos-SW3	pass	ping	4	-	-	ping 10.240.0.122 routing-instance CE count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-vjunos-SW4-01	ping	vjunos-SW4	pass	ping	4	-	-	ping 172.16.0.41 source 172.16.0.44 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW1
+P-vjunos-SW4-02	ping	vjunos-SW4	pass	ping	4	-	-	ping 172.16.0.42 source 172.16.0.44 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW2
+P-vjunos-SW4-03	ping	vjunos-SW4	pass	ping	4	-	-	ping 172.16.0.43 source 172.16.0.44 routing-instance CE count 5 rapid	L3VPN 110: loopback of vjunos-SW3
+P-vjunos-SW4-04	ping	vjunos-SW4	pass	ping	4	-	-	ping 172.16.0.51 source 172.16.0.44 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx1
+P-vjunos-SW4-05	ping	vjunos-SW4	pass	ping	4	-	-	ping 172.16.0.52 source 172.16.0.44 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx2
+P-vjunos-SW4-06	ping	vjunos-SW4	pass	ping	4	-	-	ping 172.16.0.53 source 172.16.0.44 routing-instance CE count 5 rapid	L3VPN 110: loopback of srx3
+P-vjunos-SW4-07	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.210.0.9 routing-instance CE count 5 rapid	VPWS 210, targeted LDP: vjunos-SW2
+P-vjunos-SW4-08	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.230.0.1 routing-instance CE count 5 rapid	VPWS 230, EVPN: vjunos-SW1
+P-vjunos-SW4-09	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.220.0.1 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW1
+P-vjunos-SW4-10	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.220.0.2 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW2
+P-vjunos-SW4-11	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.220.0.3 routing-instance CE count 5 rapid	VPLS 220: vjunos-SW3
+P-vjunos-SW4-12	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.220.0.104 routing-instance CE count 5 rapid	VPLS 220: srx4 on CEOS3
+P-vjunos-SW4-13	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.220.0.105 routing-instance CE count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-vjunos-SW4-14	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.220.0.107 routing-instance CE count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-vjunos-SW4-15	ping	vjunos-SW4	xfail	ping	4	-	-	ping 10.220.0.108 routing-instance CE count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-vjunos-SW4-16	ping	vjunos-SW4	xfail	ping	4	-	-	ping 10.220.0.113 routing-instance CE count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-vjunos-SW4-17	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.220.0.119 routing-instance CE count 5 rapid	VPLS 220: srx19 on CEOS2
+P-vjunos-SW4-18	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.220.0.120 routing-instance CE count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-vjunos-SW4-19	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.220.0.122 routing-instance CE count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-vjunos-SW4-20	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.41 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW1
+P-vjunos-SW4-21	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.42 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW2
+P-vjunos-SW4-22	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.43 routing-instance CE count 5 rapid	EVPN LAN 240: vjunos-SW3
+P-vjunos-SW4-23	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.51 routing-instance CE count 5 rapid	EVPN LAN 240: srx1 on cEOS
+P-vjunos-SW4-24	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.52 routing-instance CE count 5 rapid	EVPN LAN 240: srx2 on cEOS
+P-vjunos-SW4-25	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.53 routing-instance CE count 5 rapid	EVPN LAN 240: srx3 on cEOS
+P-vjunos-SW4-26	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.104 routing-instance CE count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-vjunos-SW4-27	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.105 routing-instance CE count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-vjunos-SW4-28	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.107 routing-instance CE count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-vjunos-SW4-29	ping	vjunos-SW4	xfail	ping	4	-	-	ping 10.240.0.108 routing-instance CE count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-vjunos-SW4-30	ping	vjunos-SW4	xfail	ping	4	-	-	ping 10.240.0.113 routing-instance CE count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-vjunos-SW4-31	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.119 routing-instance CE count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-vjunos-SW4-32	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.120 routing-instance CE count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-vjunos-SW4-33	ping	vjunos-SW4	pass	ping	4	-	-	ping 10.240.0.122 routing-instance CE count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-srx7-01	ping	srx7	pass	ping	4	-	-	ping 172.16.0.104 source 172.16.0.107 count 5 rapid	L3VPN 111: srx4 on CEOS3
+P-srx7-02	ping	srx7	pass	ping	4	-	-	ping 172.16.0.105 source 172.16.0.107 count 5 rapid	L3VPN 111: srx5 on evo-rtr3
+P-srx7-03	ping	srx7	pass	ping	4	-	-	ping 172.16.0.108 source 172.16.0.107 count 5 rapid	L3VPN 111: srx8 on xrv-rtr3
+P-srx7-04	ping	srx7	pass	ping	4	-	-	ping 172.16.0.113 source 172.16.0.107 count 5 rapid	L3VPN 111: srx13 on xrv-rtr2
+P-srx7-05	ping	srx7	pass	ping	4	-	-	ping 172.16.0.119 source 172.16.0.107 count 5 rapid	L3VPN 111: srx19 on CEOS2
+P-srx7-06	ping	srx7	pass	ping	4	-	-	ping 172.16.0.120 source 172.16.0.107 count 5 rapid	L3VPN 111: srx20 on evo-rtr2
+P-srx7-07	ping	srx7	pass	ping	4	-	-	ping 172.16.0.122 source 172.16.0.107 count 5 rapid	L3VPN 111: srx22 on vjunos-RTR2
+P-srx7-08	ping	srx7	pass	ping	4	-	-	ping 10.220.0.104 count 5 rapid	VPLS 220: srx4 on CEOS3
+P-srx7-09	ping	srx7	pass	ping	4	-	-	ping 10.220.0.105 count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-srx7-10	ping	srx7	xfail	ping	4	-	-	ping 10.220.0.108 count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-srx7-11	ping	srx7	xfail	ping	4	-	-	ping 10.220.0.113 count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-srx7-12	ping	srx7	pass	ping	4	-	-	ping 10.220.0.119 count 5 rapid	VPLS 220: srx19 on CEOS2
+P-srx7-13	ping	srx7	pass	ping	4	-	-	ping 10.220.0.120 count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-srx7-14	ping	srx7	pass	ping	4	-	-	ping 10.220.0.122 count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-srx7-15	ping	srx7	pass	ping	4	-	-	ping 10.240.0.104 count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-srx7-16	ping	srx7	pass	ping	4	-	-	ping 10.240.0.105 count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-srx7-17	ping	srx7	xfail	ping	4	-	-	ping 10.240.0.108 count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-srx7-18	ping	srx7	xfail	ping	4	-	-	ping 10.240.0.113 count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-srx7-19	ping	srx7	pass	ping	4	-	-	ping 10.240.0.119 count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-srx7-20	ping	srx7	pass	ping	4	-	-	ping 10.240.0.120 count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-srx7-21	ping	srx7	pass	ping	4	-	-	ping 10.240.0.122 count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-srx12-01	ping	srx12	pass	ping	4	-	-	ping 10.21.12.1 count 5 rapid	VPWS 2112, targeted LDP: srx23 on xrv-rtr2
+P-srx12-02	ping	srx12	pass	ping	4	-	-	ping 10.21.22.1 count 5 rapid	VPWS 2122, targeted LDP: srx17 on vjunos-RTR2
+P-srx12-03	ping	srx12	pass	ping	4	-	-	ping 10.21.32.1 count 5 rapid	VPWS 2132, targeted LDP: srx15 on evo-rtr2
+P-srx12-04	ping	srx12	pass	ping	4	-	-	ping 10.21.42.1 count 5 rapid	VPWS 2142, targeted LDP: srx14 on CEOS2
+P-srx12-05	ping	srx12	pass	ping	4	-	-	ping 10.23.12.1 count 5 rapid	VPWS 2312, EVPN: srx23 on xrv-rtr2
+P-srx12-06	ping	srx12	pass	ping	4	-	-	ping 10.23.22.1 count 5 rapid	VPWS 2322, EVPN: srx17 on vjunos-RTR2
+P-srx12-07	ping	srx12	pass	ping	4	-	-	ping 10.23.32.1 count 5 rapid	VPWS 2332, EVPN: srx15 on evo-rtr2
+P-srx12-08	ping	srx12	pass	ping	4	-	-	ping 10.23.42.1 count 5 rapid	VPWS 2342, EVPN: srx14 on CEOS2
+P-srx17-01	ping	srx17	pass	ping	4	-	-	ping 10.21.21.2 count 5 rapid	VPWS 2121, targeted LDP: srx18 on xrv-rtr3
+P-srx17-02	ping	srx17	pass	ping	4	-	-	ping 10.21.22.2 count 5 rapid	VPWS 2122, targeted LDP: srx12 on vjunos-RTR3
+P-srx17-03	ping	srx17	pass	ping	4	-	-	ping 10.21.23.2 count 5 rapid	VPWS 2123, targeted LDP: srx10 on evo-rtr3
+P-srx17-04	ping	srx17	pass	ping	4	-	-	ping 10.21.24.2 count 5 rapid	VPWS 2124, targeted LDP: srx9 on CEOS3
+P-srx17-05	ping	srx17	pass	ping	4	-	-	ping 10.23.21.2 count 5 rapid	VPWS 2321, EVPN: srx18 on xrv-rtr3
+P-srx17-06	ping	srx17	pass	ping	4	-	-	ping 10.23.22.2 count 5 rapid	VPWS 2322, EVPN: srx12 on vjunos-RTR3
+P-srx17-07	ping	srx17	pass	ping	4	-	-	ping 10.23.23.2 count 5 rapid	VPWS 2323, EVPN: srx10 on evo-rtr3
+P-srx17-08	ping	srx17	pass	ping	4	-	-	ping 10.23.24.2 count 5 rapid	VPWS 2324, EVPN: srx9 on CEOS3
+P-srx22-01	ping	srx22	pass	ping	4	-	-	ping 172.16.0.104 source 172.16.0.122 count 5 rapid	L3VPN 111: srx4 on CEOS3
+P-srx22-02	ping	srx22	pass	ping	4	-	-	ping 172.16.0.105 source 172.16.0.122 count 5 rapid	L3VPN 111: srx5 on evo-rtr3
+P-srx22-03	ping	srx22	pass	ping	4	-	-	ping 172.16.0.107 source 172.16.0.122 count 5 rapid	L3VPN 111: srx7 on vjunos-RTR3
+P-srx22-04	ping	srx22	pass	ping	4	-	-	ping 172.16.0.108 source 172.16.0.122 count 5 rapid	L3VPN 111: srx8 on xrv-rtr3
+P-srx22-05	ping	srx22	pass	ping	4	-	-	ping 172.16.0.113 source 172.16.0.122 count 5 rapid	L3VPN 111: srx13 on xrv-rtr2
+P-srx22-06	ping	srx22	pass	ping	4	-	-	ping 172.16.0.119 source 172.16.0.122 count 5 rapid	L3VPN 111: srx19 on CEOS2
+P-srx22-07	ping	srx22	pass	ping	4	-	-	ping 172.16.0.120 source 172.16.0.122 count 5 rapid	L3VPN 111: srx20 on evo-rtr2
+P-srx22-08	ping	srx22	pass	ping	4	-	-	ping 10.220.0.104 count 5 rapid	VPLS 220: srx4 on CEOS3
+P-srx22-09	ping	srx22	pass	ping	4	-	-	ping 10.220.0.105 count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-srx22-10	ping	srx22	pass	ping	4	-	-	ping 10.220.0.107 count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-srx22-11	ping	srx22	xfail	ping	4	-	-	ping 10.220.0.108 count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-srx22-12	ping	srx22	xfail	ping	4	-	-	ping 10.220.0.113 count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-srx22-13	ping	srx22	pass	ping	4	-	-	ping 10.220.0.119 count 5 rapid	VPLS 220: srx19 on CEOS2
+P-srx22-14	ping	srx22	pass	ping	4	-	-	ping 10.220.0.120 count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-srx22-15	ping	srx22	pass	ping	4	-	-	ping 10.240.0.104 count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-srx22-16	ping	srx22	pass	ping	4	-	-	ping 10.240.0.105 count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-srx22-17	ping	srx22	pass	ping	4	-	-	ping 10.240.0.107 count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-srx22-18	ping	srx22	xfail	ping	4	-	-	ping 10.240.0.108 count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-srx22-19	ping	srx22	xfail	ping	4	-	-	ping 10.240.0.113 count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-srx22-20	ping	srx22	pass	ping	4	-	-	ping 10.240.0.119 count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-srx22-21	ping	srx22	pass	ping	4	-	-	ping 10.240.0.120 count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-srx5-01	ping	srx5	pass	ping	4	-	-	ping 172.16.0.104 source 172.16.0.105 count 5 rapid	L3VPN 111: srx4 on CEOS3
+P-srx5-02	ping	srx5	pass	ping	4	-	-	ping 172.16.0.107 source 172.16.0.105 count 5 rapid	L3VPN 111: srx7 on vjunos-RTR3
+P-srx5-03	ping	srx5	pass	ping	4	-	-	ping 172.16.0.108 source 172.16.0.105 count 5 rapid	L3VPN 111: srx8 on xrv-rtr3
+P-srx5-04	ping	srx5	pass	ping	4	-	-	ping 172.16.0.113 source 172.16.0.105 count 5 rapid	L3VPN 111: srx13 on xrv-rtr2
+P-srx5-05	ping	srx5	pass	ping	4	-	-	ping 172.16.0.119 source 172.16.0.105 count 5 rapid	L3VPN 111: srx19 on CEOS2
+P-srx5-06	ping	srx5	pass	ping	4	-	-	ping 172.16.0.120 source 172.16.0.105 count 5 rapid	L3VPN 111: srx20 on evo-rtr2
+P-srx5-07	ping	srx5	pass	ping	4	-	-	ping 172.16.0.122 source 172.16.0.105 count 5 rapid	L3VPN 111: srx22 on vjunos-RTR2
+P-srx5-08	ping	srx5	pass	ping	4	-	-	ping 10.220.0.104 count 5 rapid	VPLS 220: srx4 on CEOS3
+P-srx5-09	ping	srx5	pass	ping	4	-	-	ping 10.220.0.107 count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-srx5-10	ping	srx5	xfail	ping	4	-	-	ping 10.220.0.108 count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-srx5-11	ping	srx5	xfail	ping	4	-	-	ping 10.220.0.113 count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-srx5-12	ping	srx5	pass	ping	4	-	-	ping 10.220.0.119 count 5 rapid	VPLS 220: srx19 on CEOS2
+P-srx5-13	ping	srx5	pass	ping	4	-	-	ping 10.220.0.120 count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-srx5-14	ping	srx5	pass	ping	4	-	-	ping 10.220.0.122 count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-srx5-15	ping	srx5	pass	ping	4	-	-	ping 10.240.0.104 count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-srx5-16	ping	srx5	pass	ping	4	-	-	ping 10.240.0.107 count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-srx5-17	ping	srx5	xfail	ping	4	-	-	ping 10.240.0.108 count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-srx5-18	ping	srx5	xfail	ping	4	-	-	ping 10.240.0.113 count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-srx5-19	ping	srx5	pass	ping	4	-	-	ping 10.240.0.119 count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-srx5-20	ping	srx5	pass	ping	4	-	-	ping 10.240.0.120 count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-srx5-21	ping	srx5	pass	ping	4	-	-	ping 10.240.0.122 count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-srx10-01	ping	srx10	pass	ping	4	-	-	ping 10.21.13.1 count 5 rapid	VPWS 2113, targeted LDP: srx23 on xrv-rtr2
+P-srx10-02	ping	srx10	pass	ping	4	-	-	ping 10.21.23.1 count 5 rapid	VPWS 2123, targeted LDP: srx17 on vjunos-RTR2
+P-srx10-03	ping	srx10	pass	ping	4	-	-	ping 10.21.33.1 count 5 rapid	VPWS 2133, targeted LDP: srx15 on evo-rtr2
+P-srx10-04	ping	srx10	pass	ping	4	-	-	ping 10.21.43.1 count 5 rapid	VPWS 2143, targeted LDP: srx14 on CEOS2
+P-srx10-05	ping	srx10	pass	ping	4	-	-	ping 10.23.13.1 count 5 rapid	VPWS 2313, EVPN: srx23 on xrv-rtr2
+P-srx10-06	ping	srx10	pass	ping	4	-	-	ping 10.23.23.1 count 5 rapid	VPWS 2323, EVPN: srx17 on vjunos-RTR2
+P-srx10-07	ping	srx10	pass	ping	4	-	-	ping 10.23.33.1 count 5 rapid	VPWS 2333, EVPN: srx15 on evo-rtr2
+P-srx10-08	ping	srx10	pass	ping	4	-	-	ping 10.23.43.1 count 5 rapid	VPWS 2343, EVPN: srx14 on CEOS2
+P-srx15-01	ping	srx15	pass	ping	4	-	-	ping 10.21.31.2 count 5 rapid	VPWS 2131, targeted LDP: srx18 on xrv-rtr3
+P-srx15-02	ping	srx15	pass	ping	4	-	-	ping 10.21.32.2 count 5 rapid	VPWS 2132, targeted LDP: srx12 on vjunos-RTR3
+P-srx15-03	ping	srx15	pass	ping	4	-	-	ping 10.21.33.2 count 5 rapid	VPWS 2133, targeted LDP: srx10 on evo-rtr3
+P-srx15-04	ping	srx15	pass	ping	4	-	-	ping 10.21.34.2 count 5 rapid	VPWS 2134, targeted LDP: srx9 on CEOS3
+P-srx15-05	ping	srx15	pass	ping	4	-	-	ping 10.23.31.2 count 5 rapid	VPWS 2331, EVPN: srx18 on xrv-rtr3
+P-srx15-06	ping	srx15	pass	ping	4	-	-	ping 10.23.32.2 count 5 rapid	VPWS 2332, EVPN: srx12 on vjunos-RTR3
+P-srx15-07	ping	srx15	pass	ping	4	-	-	ping 10.23.33.2 count 5 rapid	VPWS 2333, EVPN: srx10 on evo-rtr3
+P-srx15-08	ping	srx15	pass	ping	4	-	-	ping 10.23.34.2 count 5 rapid	VPWS 2334, EVPN: srx9 on CEOS3
+P-srx20-01	ping	srx20	pass	ping	4	-	-	ping 172.16.0.104 source 172.16.0.120 count 5 rapid	L3VPN 111: srx4 on CEOS3
+P-srx20-02	ping	srx20	pass	ping	4	-	-	ping 172.16.0.105 source 172.16.0.120 count 5 rapid	L3VPN 111: srx5 on evo-rtr3
+P-srx20-03	ping	srx20	pass	ping	4	-	-	ping 172.16.0.107 source 172.16.0.120 count 5 rapid	L3VPN 111: srx7 on vjunos-RTR3
+P-srx20-04	ping	srx20	pass	ping	4	-	-	ping 172.16.0.108 source 172.16.0.120 count 5 rapid	L3VPN 111: srx8 on xrv-rtr3
+P-srx20-05	ping	srx20	pass	ping	4	-	-	ping 172.16.0.113 source 172.16.0.120 count 5 rapid	L3VPN 111: srx13 on xrv-rtr2
+P-srx20-06	ping	srx20	pass	ping	4	-	-	ping 172.16.0.119 source 172.16.0.120 count 5 rapid	L3VPN 111: srx19 on CEOS2
+P-srx20-07	ping	srx20	pass	ping	4	-	-	ping 172.16.0.122 source 172.16.0.120 count 5 rapid	L3VPN 111: srx22 on vjunos-RTR2
+P-srx20-08	ping	srx20	pass	ping	4	-	-	ping 10.220.0.104 count 5 rapid	VPLS 220: srx4 on CEOS3
+P-srx20-09	ping	srx20	pass	ping	4	-	-	ping 10.220.0.105 count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-srx20-10	ping	srx20	pass	ping	4	-	-	ping 10.220.0.107 count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-srx20-11	ping	srx20	xfail	ping	4	-	-	ping 10.220.0.108 count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-srx20-12	ping	srx20	xfail	ping	4	-	-	ping 10.220.0.113 count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-srx20-13	ping	srx20	pass	ping	4	-	-	ping 10.220.0.119 count 5 rapid	VPLS 220: srx19 on CEOS2
+P-srx20-14	ping	srx20	pass	ping	4	-	-	ping 10.220.0.122 count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-srx20-15	ping	srx20	pass	ping	4	-	-	ping 10.240.0.104 count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-srx20-16	ping	srx20	pass	ping	4	-	-	ping 10.240.0.105 count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-srx20-17	ping	srx20	pass	ping	4	-	-	ping 10.240.0.107 count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-srx20-18	ping	srx20	xfail	ping	4	-	-	ping 10.240.0.108 count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-srx20-19	ping	srx20	xfail	ping	4	-	-	ping 10.240.0.113 count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-srx20-20	ping	srx20	pass	ping	4	-	-	ping 10.240.0.119 count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-srx20-21	ping	srx20	pass	ping	4	-	-	ping 10.240.0.122 count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-srx8-01	ping	srx8	pass	ping	4	-	-	ping 172.16.0.104 source 172.16.0.108 count 5 rapid	L3VPN 111: srx4 on CEOS3
+P-srx8-02	ping	srx8	pass	ping	4	-	-	ping 172.16.0.105 source 172.16.0.108 count 5 rapid	L3VPN 111: srx5 on evo-rtr3
+P-srx8-03	ping	srx8	pass	ping	4	-	-	ping 172.16.0.107 source 172.16.0.108 count 5 rapid	L3VPN 111: srx7 on vjunos-RTR3
+P-srx8-04	ping	srx8	pass	ping	4	-	-	ping 172.16.0.113 source 172.16.0.108 count 5 rapid	L3VPN 111: srx13 on xrv-rtr2
+P-srx8-05	ping	srx8	pass	ping	4	-	-	ping 172.16.0.119 source 172.16.0.108 count 5 rapid	L3VPN 111: srx19 on CEOS2
+P-srx8-06	ping	srx8	pass	ping	4	-	-	ping 172.16.0.120 source 172.16.0.108 count 5 rapid	L3VPN 111: srx20 on evo-rtr2
+P-srx8-07	ping	srx8	pass	ping	4	-	-	ping 172.16.0.122 source 172.16.0.108 count 5 rapid	L3VPN 111: srx22 on vjunos-RTR2
+P-srx8-08	ping	srx8	xfail	ping	4	-	-	ping 10.220.0.104 count 5 rapid	VPLS 220: srx4 on CEOS3
+P-srx8-09	ping	srx8	xfail	ping	4	-	-	ping 10.220.0.105 count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-srx8-10	ping	srx8	xfail	ping	4	-	-	ping 10.220.0.107 count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-srx8-11	ping	srx8	xfail	ping	4	-	-	ping 10.220.0.113 count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-srx8-12	ping	srx8	xfail	ping	4	-	-	ping 10.220.0.119 count 5 rapid	VPLS 220: srx19 on CEOS2
+P-srx8-13	ping	srx8	xfail	ping	4	-	-	ping 10.220.0.120 count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-srx8-14	ping	srx8	xfail	ping	4	-	-	ping 10.220.0.122 count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-srx8-15	ping	srx8	xfail	ping	4	-	-	ping 10.240.0.104 count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-srx8-16	ping	srx8	xfail	ping	4	-	-	ping 10.240.0.105 count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-srx8-17	ping	srx8	xfail	ping	4	-	-	ping 10.240.0.107 count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-srx8-18	ping	srx8	xfail	ping	4	-	-	ping 10.240.0.113 count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-srx8-19	ping	srx8	xfail	ping	4	-	-	ping 10.240.0.119 count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-srx8-20	ping	srx8	xfail	ping	4	-	-	ping 10.240.0.120 count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-srx8-21	ping	srx8	xfail	ping	4	-	-	ping 10.240.0.122 count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-srx13-01	ping	srx13	pass	ping	4	-	-	ping 172.16.0.104 source 172.16.0.113 count 5 rapid	L3VPN 111: srx4 on CEOS3
+P-srx13-02	ping	srx13	pass	ping	4	-	-	ping 172.16.0.105 source 172.16.0.113 count 5 rapid	L3VPN 111: srx5 on evo-rtr3
+P-srx13-03	ping	srx13	pass	ping	4	-	-	ping 172.16.0.107 source 172.16.0.113 count 5 rapid	L3VPN 111: srx7 on vjunos-RTR3
+P-srx13-04	ping	srx13	pass	ping	4	-	-	ping 172.16.0.108 source 172.16.0.113 count 5 rapid	L3VPN 111: srx8 on xrv-rtr3
+P-srx13-05	ping	srx13	pass	ping	4	-	-	ping 172.16.0.119 source 172.16.0.113 count 5 rapid	L3VPN 111: srx19 on CEOS2
+P-srx13-06	ping	srx13	pass	ping	4	-	-	ping 172.16.0.120 source 172.16.0.113 count 5 rapid	L3VPN 111: srx20 on evo-rtr2
+P-srx13-07	ping	srx13	pass	ping	4	-	-	ping 172.16.0.122 source 172.16.0.113 count 5 rapid	L3VPN 111: srx22 on vjunos-RTR2
+P-srx13-08	ping	srx13	xfail	ping	4	-	-	ping 10.220.0.104 count 5 rapid	VPLS 220: srx4 on CEOS3
+P-srx13-09	ping	srx13	xfail	ping	4	-	-	ping 10.220.0.105 count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-srx13-10	ping	srx13	xfail	ping	4	-	-	ping 10.220.0.107 count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-srx13-11	ping	srx13	xfail	ping	4	-	-	ping 10.220.0.108 count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-srx13-12	ping	srx13	xfail	ping	4	-	-	ping 10.220.0.119 count 5 rapid	VPLS 220: srx19 on CEOS2
+P-srx13-13	ping	srx13	xfail	ping	4	-	-	ping 10.220.0.120 count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-srx13-14	ping	srx13	xfail	ping	4	-	-	ping 10.220.0.122 count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-srx13-15	ping	srx13	xfail	ping	4	-	-	ping 10.240.0.104 count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-srx13-16	ping	srx13	xfail	ping	4	-	-	ping 10.240.0.105 count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-srx13-17	ping	srx13	xfail	ping	4	-	-	ping 10.240.0.107 count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-srx13-18	ping	srx13	xfail	ping	4	-	-	ping 10.240.0.108 count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-srx13-19	ping	srx13	xfail	ping	4	-	-	ping 10.240.0.119 count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-srx13-20	ping	srx13	xfail	ping	4	-	-	ping 10.240.0.120 count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-srx13-21	ping	srx13	xfail	ping	4	-	-	ping 10.240.0.122 count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-srx18-01	ping	srx18	pass	ping	4	-	-	ping 10.21.11.1 count 5 rapid	VPWS 2111, targeted LDP: srx23 on xrv-rtr2
+P-srx18-02	ping	srx18	pass	ping	4	-	-	ping 10.21.21.1 count 5 rapid	VPWS 2121, targeted LDP: srx17 on vjunos-RTR2
+P-srx18-03	ping	srx18	pass	ping	4	-	-	ping 10.21.31.1 count 5 rapid	VPWS 2131, targeted LDP: srx15 on evo-rtr2
+P-srx18-04	ping	srx18	pass	ping	4	-	-	ping 10.21.41.1 count 5 rapid	VPWS 2141, targeted LDP: srx14 on CEOS2
+P-srx18-05	ping	srx18	pass	ping	4	-	-	ping 10.23.11.1 count 5 rapid	VPWS 2311, EVPN: srx23 on xrv-rtr2
+P-srx18-06	ping	srx18	pass	ping	4	-	-	ping 10.23.21.1 count 5 rapid	VPWS 2321, EVPN: srx17 on vjunos-RTR2
+P-srx18-07	ping	srx18	pass	ping	4	-	-	ping 10.23.31.1 count 5 rapid	VPWS 2331, EVPN: srx15 on evo-rtr2
+P-srx18-08	ping	srx18	pass	ping	4	-	-	ping 10.23.41.1 count 5 rapid	VPWS 2341, EVPN: srx14 on CEOS2
+P-srx23-01	ping	srx23	pass	ping	4	-	-	ping 10.21.11.2 count 5 rapid	VPWS 2111, targeted LDP: srx18 on xrv-rtr3
+P-srx23-02	ping	srx23	pass	ping	4	-	-	ping 10.21.12.2 count 5 rapid	VPWS 2112, targeted LDP: srx12 on vjunos-RTR3
+P-srx23-03	ping	srx23	pass	ping	4	-	-	ping 10.21.13.2 count 5 rapid	VPWS 2113, targeted LDP: srx10 on evo-rtr3
+P-srx23-04	ping	srx23	pass	ping	4	-	-	ping 10.21.14.2 count 5 rapid	VPWS 2114, targeted LDP: srx9 on CEOS3
+P-srx23-05	ping	srx23	pass	ping	4	-	-	ping 10.23.11.2 count 5 rapid	VPWS 2311, EVPN: srx18 on xrv-rtr3
+P-srx23-06	ping	srx23	pass	ping	4	-	-	ping 10.23.12.2 count 5 rapid	VPWS 2312, EVPN: srx12 on vjunos-RTR3
+P-srx23-07	ping	srx23	pass	ping	4	-	-	ping 10.23.13.2 count 5 rapid	VPWS 2313, EVPN: srx10 on evo-rtr3
+P-srx23-08	ping	srx23	pass	ping	4	-	-	ping 10.23.14.2 count 5 rapid	VPWS 2314, EVPN: srx9 on CEOS3
+P-srx4-01	ping	srx4	pass	ping	4	-	-	ping 172.16.0.105 source 172.16.0.104 count 5 rapid	L3VPN 111: srx5 on evo-rtr3
+P-srx4-02	ping	srx4	pass	ping	4	-	-	ping 172.16.0.107 source 172.16.0.104 count 5 rapid	L3VPN 111: srx7 on vjunos-RTR3
+P-srx4-03	ping	srx4	pass	ping	4	-	-	ping 172.16.0.108 source 172.16.0.104 count 5 rapid	L3VPN 111: srx8 on xrv-rtr3
+P-srx4-04	ping	srx4	pass	ping	4	-	-	ping 172.16.0.113 source 172.16.0.104 count 5 rapid	L3VPN 111: srx13 on xrv-rtr2
+P-srx4-05	ping	srx4	pass	ping	4	-	-	ping 172.16.0.119 source 172.16.0.104 count 5 rapid	L3VPN 111: srx19 on CEOS2
+P-srx4-06	ping	srx4	pass	ping	4	-	-	ping 172.16.0.120 source 172.16.0.104 count 5 rapid	L3VPN 111: srx20 on evo-rtr2
+P-srx4-07	ping	srx4	pass	ping	4	-	-	ping 172.16.0.122 source 172.16.0.104 count 5 rapid	L3VPN 111: srx22 on vjunos-RTR2
+P-srx4-08	ping	srx4	pass	ping	4	-	-	ping 10.220.0.105 count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-srx4-09	ping	srx4	pass	ping	4	-	-	ping 10.220.0.107 count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-srx4-10	ping	srx4	xfail	ping	4	-	-	ping 10.220.0.108 count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-srx4-11	ping	srx4	xfail	ping	4	-	-	ping 10.220.0.113 count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-srx4-12	ping	srx4	pass	ping	4	-	-	ping 10.220.0.119 count 5 rapid	VPLS 220: srx19 on CEOS2
+P-srx4-13	ping	srx4	pass	ping	4	-	-	ping 10.220.0.120 count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-srx4-14	ping	srx4	pass	ping	4	-	-	ping 10.220.0.122 count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-srx4-15	ping	srx4	pass	ping	4	-	-	ping 10.240.0.105 count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-srx4-16	ping	srx4	pass	ping	4	-	-	ping 10.240.0.107 count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-srx4-17	ping	srx4	xfail	ping	4	-	-	ping 10.240.0.108 count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-srx4-18	ping	srx4	xfail	ping	4	-	-	ping 10.240.0.113 count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-srx4-19	ping	srx4	pass	ping	4	-	-	ping 10.240.0.119 count 5 rapid	EVPN LAN 240: srx19 on CEOS2
+P-srx4-20	ping	srx4	pass	ping	4	-	-	ping 10.240.0.120 count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-srx4-21	ping	srx4	pass	ping	4	-	-	ping 10.240.0.122 count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-srx9-01	ping	srx9	pass	ping	4	-	-	ping 10.21.14.1 count 5 rapid	VPWS 2114, targeted LDP: srx23 on xrv-rtr2
+P-srx9-02	ping	srx9	pass	ping	4	-	-	ping 10.21.24.1 count 5 rapid	VPWS 2124, targeted LDP: srx17 on vjunos-RTR2
+P-srx9-03	ping	srx9	pass	ping	4	-	-	ping 10.21.34.1 count 5 rapid	VPWS 2134, targeted LDP: srx15 on evo-rtr2
+P-srx9-04	ping	srx9	pass	ping	4	-	-	ping 10.21.44.1 count 5 rapid	VPWS 2144, targeted LDP: srx14 on CEOS2
+P-srx9-05	ping	srx9	pass	ping	4	-	-	ping 10.23.14.1 count 5 rapid	VPWS 2314, EVPN: srx23 on xrv-rtr2
+P-srx9-06	ping	srx9	pass	ping	4	-	-	ping 10.23.24.1 count 5 rapid	VPWS 2324, EVPN: srx17 on vjunos-RTR2
+P-srx9-07	ping	srx9	pass	ping	4	-	-	ping 10.23.34.1 count 5 rapid	VPWS 2334, EVPN: srx15 on evo-rtr2
+P-srx9-08	ping	srx9	pass	ping	4	-	-	ping 10.23.44.1 count 5 rapid	VPWS 2344, EVPN: srx14 on CEOS2
+P-srx14-01	ping	srx14	pass	ping	4	-	-	ping 10.21.41.2 count 5 rapid	VPWS 2141, targeted LDP: srx18 on xrv-rtr3
+P-srx14-02	ping	srx14	pass	ping	4	-	-	ping 10.21.42.2 count 5 rapid	VPWS 2142, targeted LDP: srx12 on vjunos-RTR3
+P-srx14-03	ping	srx14	pass	ping	4	-	-	ping 10.21.43.2 count 5 rapid	VPWS 2143, targeted LDP: srx10 on evo-rtr3
+P-srx14-04	ping	srx14	pass	ping	4	-	-	ping 10.21.44.2 count 5 rapid	VPWS 2144, targeted LDP: srx9 on CEOS3
+P-srx14-05	ping	srx14	pass	ping	4	-	-	ping 10.23.41.2 count 5 rapid	VPWS 2341, EVPN: srx18 on xrv-rtr3
+P-srx14-06	ping	srx14	pass	ping	4	-	-	ping 10.23.42.2 count 5 rapid	VPWS 2342, EVPN: srx12 on vjunos-RTR3
+P-srx14-07	ping	srx14	pass	ping	4	-	-	ping 10.23.43.2 count 5 rapid	VPWS 2343, EVPN: srx10 on evo-rtr3
+P-srx14-08	ping	srx14	pass	ping	4	-	-	ping 10.23.44.2 count 5 rapid	VPWS 2344, EVPN: srx9 on CEOS3
+P-srx19-01	ping	srx19	pass	ping	4	-	-	ping 172.16.0.104 source 172.16.0.119 count 5 rapid	L3VPN 111: srx4 on CEOS3
+P-srx19-02	ping	srx19	pass	ping	4	-	-	ping 172.16.0.105 source 172.16.0.119 count 5 rapid	L3VPN 111: srx5 on evo-rtr3
+P-srx19-03	ping	srx19	pass	ping	4	-	-	ping 172.16.0.107 source 172.16.0.119 count 5 rapid	L3VPN 111: srx7 on vjunos-RTR3
+P-srx19-04	ping	srx19	pass	ping	4	-	-	ping 172.16.0.108 source 172.16.0.119 count 5 rapid	L3VPN 111: srx8 on xrv-rtr3
+P-srx19-05	ping	srx19	pass	ping	4	-	-	ping 172.16.0.113 source 172.16.0.119 count 5 rapid	L3VPN 111: srx13 on xrv-rtr2
+P-srx19-06	ping	srx19	pass	ping	4	-	-	ping 172.16.0.120 source 172.16.0.119 count 5 rapid	L3VPN 111: srx20 on evo-rtr2
+P-srx19-07	ping	srx19	pass	ping	4	-	-	ping 172.16.0.122 source 172.16.0.119 count 5 rapid	L3VPN 111: srx22 on vjunos-RTR2
+P-srx19-08	ping	srx19	pass	ping	4	-	-	ping 10.220.0.104 count 5 rapid	VPLS 220: srx4 on CEOS3
+P-srx19-09	ping	srx19	pass	ping	4	-	-	ping 10.220.0.105 count 5 rapid	VPLS 220: srx5 on evo-rtr3
+P-srx19-10	ping	srx19	pass	ping	4	-	-	ping 10.220.0.107 count 5 rapid	VPLS 220: srx7 on vjunos-RTR3
+P-srx19-11	ping	srx19	xfail	ping	4	-	-	ping 10.220.0.108 count 5 rapid	VPLS 220: srx8 on xrv-rtr3
+P-srx19-12	ping	srx19	xfail	ping	4	-	-	ping 10.220.0.113 count 5 rapid	VPLS 220: srx13 on xrv-rtr2
+P-srx19-13	ping	srx19	pass	ping	4	-	-	ping 10.220.0.120 count 5 rapid	VPLS 220: srx20 on evo-rtr2
+P-srx19-14	ping	srx19	pass	ping	4	-	-	ping 10.220.0.122 count 5 rapid	VPLS 220: srx22 on vjunos-RTR2
+P-srx19-15	ping	srx19	pass	ping	4	-	-	ping 10.240.0.104 count 5 rapid	EVPN LAN 240: srx4 on CEOS3
+P-srx19-16	ping	srx19	pass	ping	4	-	-	ping 10.240.0.105 count 5 rapid	EVPN LAN 240: srx5 on evo-rtr3
+P-srx19-17	ping	srx19	pass	ping	4	-	-	ping 10.240.0.107 count 5 rapid	EVPN LAN 240: srx7 on vjunos-RTR3
+P-srx19-18	ping	srx19	xfail	ping	4	-	-	ping 10.240.0.108 count 5 rapid	EVPN LAN 240: srx8 on xrv-rtr3
+P-srx19-19	ping	srx19	xfail	ping	4	-	-	ping 10.240.0.113 count 5 rapid	EVPN LAN 240: srx13 on xrv-rtr2
+P-srx19-20	ping	srx19	pass	ping	4	-	-	ping 10.240.0.120 count 5 rapid	EVPN LAN 240: srx20 on evo-rtr2
+P-srx19-21	ping	srx19	pass	ping	4	-	-	ping 10.240.0.122 count 5 rapid	EVPN LAN 240: srx22 on vjunos-RTR2
+P-srx1-01	ping	srx1	pass	ping	4	-	-	ping 172.16.0.41 source 172.16.0.51 count 5 rapid	L3VPN 110: loopback of vjunos-SW1
+P-srx1-02	ping	srx1	pass	ping	4	-	-	ping 10.240.0.41 count 5 rapid	EVPN LAN 240: vjunos-SW1
+P-srx1-03	ping	srx1	pass	ping	4	-	-	ping 172.16.0.42 source 172.16.0.51 count 5 rapid	L3VPN 110: loopback of vjunos-SW2
+P-srx1-04	ping	srx1	pass	ping	4	-	-	ping 10.240.0.42 count 5 rapid	EVPN LAN 240: vjunos-SW2
+P-srx1-05	ping	srx1	pass	ping	4	-	-	ping 172.16.0.43 source 172.16.0.51 count 5 rapid	L3VPN 110: loopback of vjunos-SW3
+P-srx1-06	ping	srx1	pass	ping	4	-	-	ping 10.240.0.43 count 5 rapid	EVPN LAN 240: vjunos-SW3
+P-srx1-07	ping	srx1	pass	ping	4	-	-	ping 172.16.0.44 source 172.16.0.51 count 5 rapid	L3VPN 110: loopback of vjunos-SW4
+P-srx1-08	ping	srx1	pass	ping	4	-	-	ping 10.240.0.44 count 5 rapid	EVPN LAN 240: vjunos-SW4
+P-srx2-01	ping	srx2	pass	ping	4	-	-	ping 172.16.0.41 source 172.16.0.52 count 5 rapid	L3VPN 110: loopback of vjunos-SW1
+P-srx2-02	ping	srx2	pass	ping	4	-	-	ping 10.240.0.41 count 5 rapid	EVPN LAN 240: vjunos-SW1
+P-srx2-03	ping	srx2	pass	ping	4	-	-	ping 172.16.0.42 source 172.16.0.52 count 5 rapid	L3VPN 110: loopback of vjunos-SW2
+P-srx2-04	ping	srx2	pass	ping	4	-	-	ping 10.240.0.42 count 5 rapid	EVPN LAN 240: vjunos-SW2
+P-srx2-05	ping	srx2	pass	ping	4	-	-	ping 172.16.0.43 source 172.16.0.52 count 5 rapid	L3VPN 110: loopback of vjunos-SW3
+P-srx2-06	ping	srx2	pass	ping	4	-	-	ping 10.240.0.43 count 5 rapid	EVPN LAN 240: vjunos-SW3
+P-srx2-07	ping	srx2	pass	ping	4	-	-	ping 172.16.0.44 source 172.16.0.52 count 5 rapid	L3VPN 110: loopback of vjunos-SW4
+P-srx2-08	ping	srx2	pass	ping	4	-	-	ping 10.240.0.44 count 5 rapid	EVPN LAN 240: vjunos-SW4
+P-srx3-01	ping	srx3	pass	ping	4	-	-	ping 172.16.0.41 source 172.16.0.53 count 5 rapid	L3VPN 110: loopback of vjunos-SW1
+P-srx3-02	ping	srx3	pass	ping	4	-	-	ping 10.240.0.41 count 5 rapid	EVPN LAN 240: vjunos-SW1
+P-srx3-03	ping	srx3	pass	ping	4	-	-	ping 172.16.0.42 source 172.16.0.53 count 5 rapid	L3VPN 110: loopback of vjunos-SW2
+P-srx3-04	ping	srx3	pass	ping	4	-	-	ping 10.240.0.42 count 5 rapid	EVPN LAN 240: vjunos-SW2
+P-srx3-05	ping	srx3	pass	ping	4	-	-	ping 172.16.0.43 source 172.16.0.53 count 5 rapid	L3VPN 110: loopback of vjunos-SW3
+P-srx3-06	ping	srx3	pass	ping	4	-	-	ping 10.240.0.43 count 5 rapid	EVPN LAN 240: vjunos-SW3
+P-srx3-07	ping	srx3	pass	ping	4	-	-	ping 172.16.0.44 source 172.16.0.53 count 5 rapid	L3VPN 110: loopback of vjunos-SW4
+P-srx3-08	ping	srx3	pass	ping	4	-	-	ping 10.240.0.44 count 5 rapid	EVPN LAN 240: vjunos-SW4
+P-xrv-rtr1-01	ping	xrv-rtr1	pass	ping	4	-	-	ping vrf L3VPN-A 172.16.0.41 source 10.100.0.1	L3VPN: loopback of vjunos-SW1
+P-xrv-rtr1-02	ping	xrv-rtr1	pass	ping	4	-	-	ping vrf L3VPN-A 172.16.0.51 source 10.100.0.1	L3VPN: loopback of srx1
+P-xrv-rtr2-01	ping	xrv-rtr2	pass	ping	4	-	-	ping vrf L3VPN-A 172.16.0.41 source 10.100.0.2	L3VPN: loopback of vjunos-SW1
+P-xrv-rtr2-02	ping	xrv-rtr2	pass	ping	4	-	-	ping vrf L3VPN-A 172.16.0.51 source 10.100.0.2	L3VPN: loopback of srx1
+P-xrv-rtr3-01	ping	xrv-rtr3	pass	ping	4	-	-	ping vrf L3VPN-A 172.16.0.41 source 10.100.0.3	L3VPN: loopback of vjunos-SW1
+P-xrv-rtr3-02	ping	xrv-rtr3	pass	ping	4	-	-	ping vrf L3VPN-A 172.16.0.51 source 10.100.0.3	L3VPN: loopback of srx1
