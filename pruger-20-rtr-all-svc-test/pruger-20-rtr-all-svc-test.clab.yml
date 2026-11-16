@@ -15,6 +15,11 @@ topology:
     cisco_xrv9k:
       env:
         QEMU_SMP: "4"
+    juniper_cjunosevolved:
+      env:
+        # The image loads /config/startup-config.cfg only if this variable is set. Docker
+        # labs get it from containerlab. The c9s runtime does not set it (found 2026-11-16).
+        CLAB_LABEL_CLAB_NODE_KIND: juniper_cjunosevolved
   nodes:
     xrv-rtr1:
       kind: cisco_xrv9k
