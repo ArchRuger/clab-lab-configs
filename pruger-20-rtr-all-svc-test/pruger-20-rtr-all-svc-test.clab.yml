@@ -1,11 +1,11 @@
 # Made by deploy/gen-url-lab.py. Do not edit by hand.
 # Each node takes its startup config from a URL. containerlab downloads the
 # files at the deploy, on the machine that deploys.
-# Source: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test
+# Source: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test
 # The node "validator" needs one file next to this lab file: id_rsa, the private
 # SSH key of the lab. It is not in a repository. The validator downloads its
 # script and its lists when it starts. If /root/validator is empty, run:
-#   mkdir -p /root/validator && cd /root/validator && for f in validate.sh inventory.tsv checks.tsv; do curl -fsSL -O https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/validator/$f; done
+#   mkdir -p /root/validator && cd /root/validator && for f in validate.sh inventory.tsv checks.tsv; do curl -fsSL -O https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/validator/$f; done
 # Run the checks:  bash /root/validator/validate.sh --wait 60
 name: pruger-20-rtr-all-svc-test
 mgmt:
@@ -25,182 +25,182 @@ topology:
       kind: cisco_xrv9k
       image: n24l/cisco_xrv9k:24.3.1-cfgfix1
       mgmt-ipv4: 172.20.25.1
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/xrv-rtr1.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/xrv-rtr1.cfg
     xrv-rtr2:
       kind: cisco_xrv9k
       image: n24l/cisco_xrv9k:24.3.1-cfgfix1
       mgmt-ipv4: 172.20.25.2
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/xrv-rtr2.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/xrv-rtr2.cfg
     xrv-rtr3:
       kind: cisco_xrv9k
       image: n24l/cisco_xrv9k:24.3.1-cfgfix1
       mgmt-ipv4: 172.20.25.3
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/xrv-rtr3.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/xrv-rtr3.cfg
     vjunos-RTR1:
       kind: juniper_vjunosrouter
       image: n24l/juniper_vjunos-router:26.2R1.7
       mgmt-ipv4: 172.20.25.11
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/vjunos-RTR1.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/vjunos-RTR1.cfg
     vjunos-RTR2:
       kind: juniper_vjunosrouter
       image: n24l/juniper_vjunos-router:26.2R1.7
       mgmt-ipv4: 172.20.25.12
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/vjunos-RTR2.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/vjunos-RTR2.cfg
     vjunos-RTR3:
       kind: juniper_vjunosrouter
       image: n24l/juniper_vjunos-router:26.2R1.7
       mgmt-ipv4: 172.20.25.13
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/vjunos-RTR3.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/vjunos-RTR3.cfg
     vjunos-RTR4:
       kind: juniper_vjunosrouter
       image: n24l/juniper_vjunos-router:26.2R1.7
       mgmt-ipv4: 172.20.25.14
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/vjunos-RTR4.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/vjunos-RTR4.cfg
     vjunos-SW1:
       kind: juniper_vjunosswitch
       image: n24l/vjunos-switch:23.2R1.14
       mgmt-ipv4: 172.20.25.41
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/vjunos-SW1.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/vjunos-SW1.cfg
     vjunos-SW2:
       kind: juniper_vjunosswitch
       image: n24l/vjunos-switch:23.2R1.14
       mgmt-ipv4: 172.20.25.42
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/vjunos-SW2.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/vjunos-SW2.cfg
     vjunos-SW3:
       kind: juniper_vjunosswitch
       image: n24l/vjunos-switch:23.2R1.14
       mgmt-ipv4: 172.20.25.43
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/vjunos-SW3.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/vjunos-SW3.cfg
     vjunos-SW4:
       kind: juniper_vjunosswitch
       image: n24l/vjunos-switch:23.2R1.14
       mgmt-ipv4: 172.20.25.44
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/vjunos-SW4.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/vjunos-SW4.cfg
     evo-rtr1:
       kind: juniper_cjunosevolved
       image: n24l/cjunosevolved:sshfix1
       mgmt-ipv4: 172.20.25.21
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/evo-rtr1.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/evo-rtr1.cfg
     evo-rtr2:
       kind: juniper_cjunosevolved
       image: n24l/cjunosevolved:sshfix1
       mgmt-ipv4: 172.20.25.22
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/evo-rtr2.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/evo-rtr2.cfg
     evo-rtr3:
       kind: juniper_cjunosevolved
       image: n24l/cjunosevolved:sshfix1
       mgmt-ipv4: 172.20.25.23
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/evo-rtr3.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/evo-rtr3.cfg
     srx1:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.51
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx1.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx1.cfg
     srx2:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.52
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx2.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx2.cfg
     srx3:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.53
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx3.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx3.cfg
     CEOS1:
       kind: arista_ceos
       image: n24l/ceos:4.35.0F
       mgmt-ipv4: 172.20.25.31
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/CEOS1.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/CEOS1.cfg
     CEOS2:
       kind: arista_ceos
       image: n24l/ceos:4.35.0F
       mgmt-ipv4: 172.20.25.32
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/CEOS2.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/CEOS2.cfg
     CEOS3:
       kind: arista_ceos
       image: n24l/ceos:4.35.0F
       mgmt-ipv4: 172.20.25.33
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/CEOS3.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/CEOS3.cfg
     srx4:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.104
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx4.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx4.cfg
     srx5:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.105
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx5.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx5.cfg
     srx7:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.107
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx7.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx7.cfg
     srx8:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.108
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx8.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx8.cfg
     srx9:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.109
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx9.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx9.cfg
     srx10:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.110
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx10.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx10.cfg
     srx12:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.112
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx12.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx12.cfg
     srx13:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.113
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx13.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx13.cfg
     srx14:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.114
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx14.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx14.cfg
     srx15:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.115
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx15.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx15.cfg
     srx17:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.117
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx17.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx17.cfg
     srx18:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.118
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx18.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx18.cfg
     srx19:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.119
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx19.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx19.cfg
     srx20:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.120
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx20.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx20.cfg
     srx22:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.122
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx22.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx22.cfg
     srx23:
       kind: juniper_vsrx
       image: n24l/juniper_vsrx:23.2R2.21
       mgmt-ipv4: 172.20.25.123
-      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx23.cfg
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/startup/srx23.cfg
     validator:
       kind: linux
       image: ghcr.io/srl-labs/network-multitool
@@ -208,7 +208,7 @@ topology:
       binds:
         - id_rsa:/opt/validator/id_rsa:ro
       exec:
-        - sh -c 'mkdir -p /root/validator && cd /root/validator && for f in validate.sh inventory.tsv checks.tsv; do curl -fsSL -O https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/validator/$f; done'
+        - sh -c 'mkdir -p /root/validator && cd /root/validator && for f in validate.sh inventory.tsv checks.tsv; do curl -fsSL -O https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/5392339d7cc2677784b63c57993dc693a2d95d8f/pruger-20-rtr-all-svc-test/validator/$f; done'
   links:
     - endpoints: [ "xrv-rtr1:Gi0/0/0/0", "xrv-rtr2:Gi0/0/0/0" ]
     - endpoints: [ "xrv-rtr2:Gi0/0/0/1", "xrv-rtr3:Gi0/0/0/0" ]
