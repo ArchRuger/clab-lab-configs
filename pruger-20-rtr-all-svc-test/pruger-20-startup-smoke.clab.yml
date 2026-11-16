@@ -1,0 +1,84 @@
+# Made by deploy/gen-url-lab.py. Do not edit by hand.
+# Each node takes its startup config from a URL. containerlab downloads the
+# files at the deploy, on the machine that deploys.
+# Source: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test
+# The node "validator" needs one file next to this lab file: id_rsa, the private
+# SSH key of the lab. It is not in a repository. The validator downloads its
+# script and its lists when it starts. If /root/validator is empty, run:
+#   mkdir -p /root/validator && cd /root/validator && for f in validate.sh inventory.tsv checks.tsv; do curl -fsSL -O https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/validator/$f; done
+# Run the checks:  bash /root/validator/validate.sh --wait 60
+name: pruger-20-startup-smoke
+mgmt:
+  ipv4-subnet: 172.20.24.0/21
+topology:
+  kinds:
+    cisco_xrv9k:
+      env:
+        QEMU_SMP: "4"
+  nodes:
+    xrv-rtr2:
+      kind: cisco_xrv9k
+      image: n24l/cisco_xrv9k:24.3.1-cfgfix1
+      mgmt-ipv4: 172.20.25.2
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/xrv-rtr2.cfg
+    vjunos-RTR2:
+      kind: juniper_vjunosrouter
+      image: n24l/juniper_vjunos-router:26.2R1.7
+      mgmt-ipv4: 172.20.25.12
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/vjunos-RTR2.cfg
+    vjunos-SW2:
+      kind: juniper_vjunosswitch
+      image: n24l/vjunos-switch:23.2R1.14
+      mgmt-ipv4: 172.20.25.42
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/vjunos-SW2.cfg
+    evo-rtr2:
+      kind: juniper_cjunosevolved
+      image: n24l/cjunosevolved:sshfix1
+      mgmt-ipv4: 172.20.25.22
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/evo-rtr2.cfg
+    CEOS2:
+      kind: arista_ceos
+      image: n24l/ceos:4.35.0F
+      mgmt-ipv4: 172.20.25.32
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/CEOS2.cfg
+    srx2:
+      kind: juniper_vsrx
+      image: n24l/juniper_vsrx:23.2R2.21
+      mgmt-ipv4: 172.20.25.52
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx2.cfg
+    srx14:
+      kind: juniper_vsrx
+      image: n24l/juniper_vsrx:23.2R2.21
+      mgmt-ipv4: 172.20.25.114
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx14.cfg
+    srx17:
+      kind: juniper_vsrx
+      image: n24l/juniper_vsrx:23.2R2.21
+      mgmt-ipv4: 172.20.25.117
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx17.cfg
+    srx19:
+      kind: juniper_vsrx
+      image: n24l/juniper_vsrx:23.2R2.21
+      mgmt-ipv4: 172.20.25.119
+      startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/startup/srx19.cfg
+    validator:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool
+      mgmt-ipv4: 172.20.25.250
+      env:
+        VALIDATOR_PHASES: access
+        VALIDATOR_NODES: "xrv-rtr2,vjunos-RTR2,vjunos-SW2,evo-rtr2,CEOS2,srx2,srx14,srx17,srx19"
+      binds:
+        - id_rsa:/opt/validator/id_rsa:ro
+      exec:
+        - sh -c 'mkdir -p /root/validator && cd /root/validator && for f in validate.sh inventory.tsv checks.tsv; do curl -fsSL -O https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/bab351d3178bb630db41683061bb0975f6928cc9/pruger-20-rtr-all-svc-test/validator/$f; done'
+  links:
+    - endpoints: [ "vjunos-RTR2:ge-0/0/0", "xrv-rtr2:Gi0/0/0/2" ]
+    - endpoints: [ "vjunos-RTR2:ge-0/0/2", "vjunos-SW2:ge-0/0/0" ]
+    - endpoints: [ "vjunos-SW2:ge-0/0/1", "evo-rtr2:eth4" ]
+    - endpoints: [ "evo-rtr2:eth5", "srx2:ge-0/0/0" ]
+    - endpoints: [ "srx2:ge-0/0/1", "CEOS2:eth1" ]
+    - endpoints: [ "CEOS2:eth2", "vjunos-SW2:ge-0/0/2" ]
+    - endpoints: [ "srx19:ge-0/0/0", "CEOS2:eth3" ]
+    - endpoints: [ "srx14:ge-0/0/0", "CEOS2:eth4" ]
+    - endpoints: [ "srx17:ge-0/0/0", "vjunos-RTR2:ge-0/0/4" ]

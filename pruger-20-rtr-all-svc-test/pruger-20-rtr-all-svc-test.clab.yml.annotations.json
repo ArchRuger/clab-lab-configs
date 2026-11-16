@@ -1,0 +1,558 @@
+{
+  "freeTextAnnotations": [
+    {
+      "id": "b1-title",
+      "text": "pruger-20-rtr-all-svc-test",
+      "position": {
+        "x": 140,
+        "y": 100
+      },
+      "fontSize": 22,
+      "fontColor": "#ffffff",
+      "backgroundColor": "#0f172a",
+      "fontWeight": "bold",
+      "roundedBackground": true
+    },
+    {
+      "id": "b1-core-facts",
+      "text": "AS 65000  |  IS-IS level 2  |  SR-MPLS, label block 16000 to 23999  |  iBGP to the route reflectors xrv-rtr1 and xrv-rtr2",
+      "position": {
+        "x": 436,
+        "y": 106.5
+      },
+      "fontSize": 13,
+      "fontColor": "#94a3b8"
+    },
+    {
+      "id": "b1-services",
+      "text": "Services by VLAN:  110 BGP L3VPN  |  210 VPWS, targeted LDP  |  220 VPLS, targeted LDP  |  230 VPWS, EVPN  |  240 EVPN LAN\nEndpoint VLANs:  111 BGP L3VPN  |  220 VPLS  |  240 EVPN LAN  |  21az VPWS, targeted LDP  |  23az VPWS, EVPN   (a = side A kind, z = side B kind: 1 XRv9k, 2 vJunos-router, 3 cJunosEvolved, 4 cEOS)",
+      "position": {
+        "x": 140,
+        "y": 1203.3957900684309
+      },
+      "fontSize": 13,
+      "fontColor": "#94a3b8"
+    },
+    {
+      "id": "panel-tests",
+      "text": "### Test the services\nOne ping for each service. A reply proves the control plane and the forwarding plane.\nRun on **vjunos-SW1** (the CE of vjunos-RTR1), if no other node is named.\n\n**110  BGP L3VPN**\n- `ping 172.16.0.51 source 172.16.0.41 routing-instance CE`  (replies from srx1)\n- On **xrv-rtr1**: `ping vrf L3VPN-A 172.16.0.41 source 10.100.0.1`\n\n**210  VPWS, targeted LDP**\n- `ping 10.210.0.2 routing-instance CE`  (replies from vjunos-SW3)\n\n**220  VPLS, targeted LDP**\n- `ping 10.220.0.4 routing-instance CE`  (replies from vjunos-SW4)\n\n**230  VPWS, EVPN signaling**\n- `ping 10.230.0.2 routing-instance CE`  (replies from vjunos-SW4)\n\n**240  EVPN LAN**\n- `ping 10.240.0.42 routing-instance CE`  (Junos to Junos, vjunos-SW2)\n- `ping 10.240.0.51 routing-instance CE`  (Junos to cEOS, srx1)",
+      "position": {
+        "x": 2367.989323843416,
+        "y": -226
+      },
+      "fontSize": 13,
+      "fontColor": "#e2e8f0",
+      "backgroundColor": "#0f172a",
+      "width": 640,
+      "roundedBackground": true
+    },
+    {
+      "id": "panel-shows",
+      "text": "### Show the components\n\n**XRv9k: core and route reflector**\n- `show isis adjacency`\n- `show isis segment-routing label table`\n- `show bgp vpnv4 unicast summary`\n- `show bgp l2vpn evpn summary`\n- `show cef 10.255.0.11/32`\n\n**vJunos-router: PE for all services**\n- `show isis adjacency`\n- `show isis overview | match SRGB`\n- `show route table inet.3`\n- `show bgp summary`\n- `show l2circuit connections`\n- `show vpls connections`\n- `show evpn vpws-instance`\n- `show evpn database instance EVPN-240`\n\n**cJunosEvolved: L3VPN PE**\n- `show isis adjacency`\n- `show bgp summary`\n- `show route table L3VPN-A.inet.0`\n\n**cEOS: L3VPN and EVPN LAN PE**\n- `show isis segment-routing tunnel`\n- `show bgp evpn summary`\n- `show bgp evpn route-type imet`\n- `show mac address-table vlan 240`\n- `show mpls label ranges`\n\n**CE: vSRX and vJunos-switch**\n- `show bgp summary`\n- `show route 172.16.0.41`\n- `show arp no-resolve`\n\n**Packet capture on cEOS, core port**\n- `bash sudo tcpdump -ne -XX -i eth2 -c 3 mpls`",
+      "position": {
+        "x": 2434.154615026948,
+        "y": 664
+      },
+      "fontSize": 13,
+      "fontColor": "#e2e8f0",
+      "backgroundColor": "#0f172a",
+      "width": 640,
+      "roundedBackground": true
+    },
+    {
+      "id": "panel-endpoints",
+      "text": "### Test the endpoints (vSRX)\nState: written from the vendor syntax, not tested. The node `validator` runs all of these checks: `bash /opt/validator/validate.sh` (docs/LAB-VALIDATOR.md). Full list: `labs/pruger-20-rtr-all-svc-test-configs/VERIFY.md`, section 5.\nPing script for each endpoint: `labs/pruger-20-rtr-all-svc-test-configs/checks/ep-NODE.txt`.\n\n**Side A (right):** xrv-rtr2, vjunos-RTR2, evo-rtr2, CEOS2.  **Side B (left):** xrv-rtr3, vjunos-RTR3, evo-rtr3, CEOS3.\n**LAN endpoints** (111, 220, 240): srx13, srx22, srx20, srx19, srx8, srx7, srx5, srx4.\n**VPWS endpoints** (21az, 23az): srx23, srx17, srx15, srx14, srx18, srx12, srx10, srx9.\n\n**LAN endpoint, run on srx22** (CE of vjunos-RTR2)\n- `ping 172.16.0.107 source 172.16.0.122`  (111 L3VPN, to srx7 on vjunos-RTR3)\n- `ping 172.16.0.113 source 172.16.0.122`  (111 L3VPN, to srx13 on xrv-rtr2)\n- `ping 10.220.0.120`  (220 VPLS, to srx20 on evo-rtr2)\n- `ping 10.220.0.119`  (220 VPLS, to srx19 on CEOS2)\n- `ping 10.240.0.105`  (240 EVPN LAN, to srx5 on evo-rtr3)\n- `ping 10.240.0.104`  (240 EVPN LAN, to srx4 on CEOS3)\n\n**VPWS endpoint, run on srx17** (CE of vjunos-RTR2, side A, kind 2)\n- `ping 10.21.21.2`  (2121, targeted LDP, to XRv9k)\n- `ping 10.21.22.2`  (2122, targeted LDP, to vJunos-router)\n- `ping 10.21.23.2`  (2123, targeted LDP, to cJunosEvolved)\n- `ping 10.21.24.2`  (2124, targeted LDP, to cEOS)\n- `ping 10.23.21.2`  (2321, EVPN, to XRv9k)\n- `ping 10.23.22.2`  (2322, EVPN, to vJunos-router)\n- `ping 10.23.23.2`  (2323, EVPN, to cJunosEvolved)\n- `ping 10.23.24.2`  (2324, EVPN, to cEOS)\n\n**State on the PE**\n- `show l2circuit connections`  (Junos)\n- `show evpn vpws-instance`  (Junos)\n- `show vpls connections`  (Junos)\n- `show l2vpn xconnect`  (XRv9k)\n- `show patch panel`  (cEOS)\n- `show vpls`  (cEOS)",
+      "position": {
+        "x": 3057.989323843416,
+        "y": -226
+      },
+      "fontSize": 13,
+      "fontColor": "#e2e8f0",
+      "backgroundColor": "#0f172a",
+      "width": 640,
+      "roundedBackground": true
+    }
+  ],
+  "freeShapeAnnotations": [],
+  "trafficRateAnnotations": [],
+  "scriptButtonAnnotations": [],
+  "groupStyleAnnotations": [
+    {
+      "id": "b1-core",
+      "name": "CORE  |  XRv9k  |  P routers, route reflectors  |  endpoint test: L3VPN, VPWS",
+      "level": "1",
+      "position": {
+        "x": 140,
+        "y": 190
+      },
+      "width": 1520,
+      "height": 200,
+      "backgroundColor": "#3b82f6",
+      "backgroundOpacity": 9,
+      "borderColor": "#3b82f6",
+      "borderWidth": 1,
+      "borderStyle": "solid",
+      "borderRadius": 14,
+      "labelColor": "#3b82f6",
+      "labelPosition": "top-left",
+      "zIndex": -1
+    },
+    {
+      "id": "b1-pe",
+      "name": "PROVIDER EDGE  |  vJunos-router  |  L3VPN, VPWS, VPLS, EVPN",
+      "level": "1",
+      "position": {
+        "x": 140,
+        "y": 440
+      },
+      "width": 1520,
+      "height": 110,
+      "backgroundColor": "#22c55e",
+      "backgroundOpacity": 9,
+      "borderColor": "#22c55e",
+      "borderWidth": 1,
+      "borderStyle": "solid",
+      "borderRadius": 14,
+      "labelColor": "#22c55e",
+      "labelPosition": "top-left",
+      "zIndex": -1
+    },
+    {
+      "id": "b1-access",
+      "name": "ACCESS  |  vJunos-switch  |  Layer 2 for the core VLAN 100, CE of vJunos-router",
+      "level": "1",
+      "position": {
+        "x": 140,
+        "y": 600
+      },
+      "width": 1520,
+      "height": 110,
+      "backgroundColor": "#f59e0b",
+      "backgroundOpacity": 9,
+      "borderColor": "#f59e0b",
+      "borderWidth": 1,
+      "borderStyle": "solid",
+      "borderRadius": 14,
+      "labelColor": "#f59e0b",
+      "labelPosition": "top-left",
+      "zIndex": -1
+    },
+    {
+      "id": "b1-pe2",
+      "name": "PROVIDER EDGE  |  cJunosEvolved, cEOS  |  L3VPN, EVPN LAN  |  endpoint test: all services",
+      "level": "1",
+      "position": {
+        "x": 140,
+        "y": 777
+      },
+      "width": 1529,
+      "height": 206,
+      "backgroundColor": "#8b5cf6",
+      "backgroundOpacity": 9,
+      "borderColor": "#8b5cf6",
+      "borderWidth": 1,
+      "borderStyle": "solid",
+      "borderRadius": 14,
+      "labelColor": "#8b5cf6",
+      "labelPosition": "top-left",
+      "zIndex": -1
+    },
+    {
+      "id": "b1-ce",
+      "name": "CUSTOMER EDGE  |  vSRX  |  two uplinks",
+      "level": "1",
+      "position": {
+        "x": 140,
+        "y": 1045
+      },
+      "width": 1520,
+      "height": 110,
+      "backgroundColor": "#f43f5e",
+      "backgroundOpacity": 9,
+      "borderColor": "#f43f5e",
+      "borderWidth": 1,
+      "borderStyle": "solid",
+      "borderRadius": 14,
+      "labelColor": "#f43f5e",
+      "labelPosition": "top-left",
+      "zIndex": -1
+    }
+  ],
+  "networkNodeAnnotations": [],
+  "nodeAnnotations": [
+    {
+      "id": "xrv-rtr1",
+      "position": {
+        "x": 920,
+        "y": 215
+      },
+      "icon": "pe",
+      "iconColor": "#3b82f6",
+      "groupId": "b1-core",
+      "interfacePattern": "Gi0/0/0/{n:0}"
+    },
+    {
+      "id": "xrv-rtr2",
+      "position": {
+        "x": 1340,
+        "y": 315
+      },
+      "icon": "pe",
+      "iconColor": "#3b82f6",
+      "groupId": "b1-core",
+      "interfacePattern": "Gi0/0/0/{n:0}"
+    },
+    {
+      "id": "xrv-rtr3",
+      "position": {
+        "x": 450,
+        "y": 315
+      },
+      "icon": "pe",
+      "iconColor": "#3b82f6",
+      "groupId": "b1-core",
+      "interfacePattern": "Gi0/0/0/{n:0}"
+    },
+    {
+      "id": "vjunos-RTR1",
+      "position": {
+        "x": 1080,
+        "y": 475
+      },
+      "icon": "pe",
+      "iconColor": "#22c55e",
+      "groupId": "b1-pe",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "vjunos-RTR2",
+      "position": {
+        "x": 1430,
+        "y": 475
+      },
+      "icon": "pe",
+      "iconColor": "#22c55e",
+      "groupId": "b1-pe",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "vjunos-RTR3",
+      "position": {
+        "x": 360,
+        "y": 475
+      },
+      "icon": "pe",
+      "iconColor": "#22c55e",
+      "groupId": "b1-pe",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "vjunos-RTR4",
+      "position": {
+        "x": 760,
+        "y": 475
+      },
+      "icon": "pe",
+      "iconColor": "#22c55e",
+      "groupId": "b1-pe",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "vjunos-SW1",
+      "position": {
+        "x": 1080,
+        "y": 635
+      },
+      "icon": "switch",
+      "iconColor": "#f59e0b",
+      "groupId": "b1-access",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "vjunos-SW2",
+      "position": {
+        "x": 1430,
+        "y": 635
+      },
+      "icon": "switch",
+      "iconColor": "#f59e0b",
+      "groupId": "b1-access",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "vjunos-SW3",
+      "position": {
+        "x": 360,
+        "y": 635
+      },
+      "icon": "switch",
+      "iconColor": "#f59e0b",
+      "groupId": "b1-access",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "vjunos-SW4",
+      "position": {
+        "x": 760,
+        "y": 635
+      },
+      "icon": "switch",
+      "iconColor": "#f59e0b",
+      "groupId": "b1-access",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "evo-rtr1",
+      "position": {
+        "x": 979.0000000000003,
+        "y": 812
+      },
+      "icon": "pe",
+      "iconColor": "#8b5cf6",
+      "groupId": "b1-pe2",
+      "interfacePattern": "eth{n:4}"
+    },
+    {
+      "id": "evo-rtr2",
+      "position": {
+        "x": 1389.0000000000005,
+        "y": 811.9999999999999
+      },
+      "icon": "pe",
+      "iconColor": "#8b5cf6",
+      "groupId": "b1-pe2",
+      "interfacePattern": "eth{n:4}"
+    },
+    {
+      "id": "evo-rtr3",
+      "position": {
+        "x": 288.9999999999999,
+        "y": 812
+      },
+      "icon": "pe",
+      "iconColor": "#8b5cf6",
+      "groupId": "b1-pe2",
+      "interfacePattern": "eth{n:4}"
+    },
+    {
+      "id": "srx1",
+      "position": {
+        "x": 1080,
+        "y": 1080
+      },
+      "icon": "rgw",
+      "iconColor": "#f43f5e",
+      "groupId": "b1-ce",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx2",
+      "position": {
+        "x": 1430,
+        "y": 1080
+      },
+      "icon": "rgw",
+      "iconColor": "#f43f5e",
+      "groupId": "b1-ce",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx3",
+      "position": {
+        "x": 360,
+        "y": 1080
+      },
+      "icon": "rgw",
+      "iconColor": "#f43f5e",
+      "groupId": "b1-ce",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "CEOS1",
+      "position": {
+        "x": 1199.0000000000005,
+        "y": 812
+      },
+      "icon": "pe",
+      "iconColor": "#06b6d4",
+      "groupId": "b1-pe2"
+    },
+    {
+      "id": "CEOS2",
+      "position": {
+        "x": 1509.0000000000005,
+        "y": 897
+      },
+      "icon": "pe",
+      "iconColor": "#06b6d4",
+      "groupId": "b1-pe2"
+    },
+    {
+      "id": "CEOS3",
+      "position": {
+        "x": 388.9999999999999,
+        "y": 897
+      },
+      "icon": "pe",
+      "iconColor": "#06b6d4",
+      "groupId": "b1-pe2"
+    },
+    {
+      "id": "srx4",
+      "position": {
+        "x": -100,
+        "y": 880
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx5",
+      "position": {
+        "x": -100,
+        "y": 795
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx7",
+      "position": {
+        "x": -100,
+        "y": 475
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx8",
+      "position": {
+        "x": -100,
+        "y": 315
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx9",
+      "position": {
+        "x": -100,
+        "y": 965
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx10",
+      "position": {
+        "x": -100,
+        "y": 709.9999999999998
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx12",
+      "position": {
+        "x": -100,
+        "y": 560
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx13",
+      "position": {
+        "x": 1900,
+        "y": 314.99999999999994
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx14",
+      "position": {
+        "x": 1900,
+        "y": 880
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx15",
+      "position": {
+        "x": 1900,
+        "y": 794.9999999999999
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx17",
+      "position": {
+        "x": 1900,
+        "y": 474.99999999999994
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx18",
+      "position": {
+        "x": -100,
+        "y": 230
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx19",
+      "position": {
+        "x": 1900,
+        "y": 966
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx20",
+      "position": {
+        "x": 1900,
+        "y": 709.9999999999998
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx22",
+      "position": {
+        "x": 1900,
+        "y": 560.0000000000001
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "srx23",
+      "position": {
+        "x": 1900,
+        "y": 228.99999999999994
+      },
+      "icon": "firewall",
+      "interfacePattern": "ge-0/0/{n:0}"
+    },
+    {
+      "id": "validator",
+      "position": {
+        "x": 1580,
+        "y": 95
+      }
+    }
+  ],
+  "edgeAnnotations": [],
+  "aliasEndpointAnnotations": [],
+  "viewerSettings": {
+    "nodeStyle": "boxed",
+    "linkLabelMode": "on-select"
+  }
+}
