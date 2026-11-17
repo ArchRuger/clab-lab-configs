@@ -78,17 +78,17 @@ topology:
       startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/1a0a9f2252c619c6b1f48b955ed4b73591156389/pruger-20-rtr-all-svc-test/startup/vjunos-SW4.cfg
     evo-rtr1:
       kind: juniper_cjunosevolved
-      image: n24l/cjunosevolved:sshfix1
+      image: n24l/cjunosevolved:intffix1
       mgmt-ipv4: 172.20.25.21
       startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/1a0a9f2252c619c6b1f48b955ed4b73591156389/pruger-20-rtr-all-svc-test/startup/evo-rtr1.cfg
     evo-rtr2:
       kind: juniper_cjunosevolved
-      image: n24l/cjunosevolved:sshfix1
+      image: n24l/cjunosevolved:intffix1
       mgmt-ipv4: 172.20.25.22
       startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/1a0a9f2252c619c6b1f48b955ed4b73591156389/pruger-20-rtr-all-svc-test/startup/evo-rtr2.cfg
     evo-rtr3:
       kind: juniper_cjunosevolved
-      image: n24l/cjunosevolved:sshfix1
+      image: n24l/cjunosevolved:intffix1
       mgmt-ipv4: 172.20.25.23
       startup-config: https://raw.githubusercontent.com/ArchRuger/clab-lab-configs/1a0a9f2252c619c6b1f48b955ed4b73591156389/pruger-20-rtr-all-svc-test/startup/evo-rtr3.cfg
     srx1:
